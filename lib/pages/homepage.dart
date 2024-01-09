@@ -109,8 +109,38 @@ class FormsPage extends StatefulWidget {
 class _FormsPageState extends State<FormsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("FormsPage"),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+            Card(
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                  },
+                  child: const ListTile(
+                    leading: Icon(Icons.article_rounded),
+                    title: Text("Registration form", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,)),
+                    subtitle: Text("Register for the allotment procedure"),
+                  ),
+                ),
+            ),
+            Card(
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                  },
+                  child: const ListTile(
+                    leading: Icon(Icons.article_rounded),
+                    title: Text("Guest form", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,)),
+                    subtitle: Text("Apply for guest room allotment"),
+                  ),
+                ),
+            ),
+        ]
+      ),
     );
   }
 }
