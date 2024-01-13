@@ -6,4 +6,5 @@ class Constants {
   static String messagingSenderId = "416489168697";
   static String projectId = "chatappflutter-5328a";
   static const primaryColor = Color.fromARGB(255, 220, 220, 170);
+  static const secondaryColor = Color.fromARGB(255, 159, 137, 125);
 }
