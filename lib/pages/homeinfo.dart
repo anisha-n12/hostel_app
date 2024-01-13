@@ -127,94 +127,53 @@ class PhotoGallery extends StatefulWidget {
 }
 
 class _PhotoGalleryState extends State<PhotoGallery> {
+  List<Container> carouselItems = [
+  Container(child: Column(
+                      children: [
+                        Image.network('https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                        const SizedBox(height: 10),
+                        const Text("Textual part")
+
+                      ],
+          )),
+  Container(child: Column(
+                      children: [
+                        Image.network('https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                        const SizedBox(height: 10),
+                        const Text("Textual part")
+                      ],
+          )),
+  Container(child: Column(
+                      children: [
+                        Image.network('https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                        const SizedBox(height: 10),
+                        const Text("Textual part")
+                      ],
+          ))
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Center(child:Text("hi"));
-    // ListView(
-    //   scrollDirection: Axis.horizontal,
-    //   children: [
-    //     CarouselSlider(
-    //       items: [
-    //         //1st Image of Slider
-    //         Container(
-    //           margin: EdgeInsets.all(6.0),
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.circular(8.0),
-    //           //   image: DecorationImage(
-    //           //     image: AssetImage("assets/hostel.jpeg"),
-    //           //     fit: BoxFit.cover,
-    //           //   ),
-    //           // ),
-    //           child: Center(child:Text("hi")),
-    //         ),
-    
-    //         //2nd Image of Slider
-    //         Container(
-    //           margin: EdgeInsets.all(6.0),
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.circular(8.0),
-    //           //   image: DecorationImage(
-    //           //     image: AssetImage("assets/hostel.jpeg"),
-    //           //     fit: BoxFit.cover,
-    //           //   ),
-    //           // ),
-    //           child: Center(child:Text("hi")),
-    //         ),
-    
-    //         //3rd Image of Slider
-    //         Container(
-    //           margin: EdgeInsets.all(6.0),
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.circular(8.0),
-    //           //   image: DecorationImage(
-    //           //     image: AssetImage("assets/hostel.jpeg"),
-    //           //     fit: BoxFit.cover,
-    //           //   ),
-    //           // ),
-    //           child: Center(child:Text("hi")),
-    //         ),
-    
-    //         //4th Image of Slider
-    //         Container(
-    //           margin: EdgeInsets.all(6.0),
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.circular(8.0),
-    //           //   image: DecorationImage(
-    //           //     image: AssetImage("assets/hostel.jpeg"),
-    //           //     fit: BoxFit.cover,
-    //           //   ),
-    //           // ),
-    //           child: Center(child:Text("hi")),
-    //         ),
-    
-    //         //5th Image of Slider
-    //         Container(
-    //           margin: EdgeInsets.all(6.0),
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.circular(8.0),
-    //           //   image: DecorationImage(
-    //           //     image: AssetImage("assets/hostel.jpeg"),
-    //           //     fit: BoxFit.cover,
-    //           //   ),
-    //           // ),
-    //           child: Center(child:Text("hi")),
-    //         ),
-    //       ],
-    
-    //       //Slider Container properties
-    //       options: CarouselOptions(
-    //         height: 180.0,
-    //         enlargeCenterPage: true,
-    //         autoPlay: true,
-    //         aspectRatio: 16 / 9,
-    //         autoPlayCurve: Curves.fastOutSlowIn,
-    //         enableInfiniteScroll: true,
-    //         autoPlayAnimationDuration: Duration(milliseconds: 800),
-    //         viewportFraction: 0.8,
-    //       ),
-    //     ),
-    //   ],
-    // );
+    Size size= MediaQuery.of(context).size;
+    return Container(
+      child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              // Other widgets
+              CarouselSlider(
+                items: carouselItems,
+                options: CarouselOptions(
+                  height: size.height*2, // Customize the height of the carousel
+                  autoPlay: false, // Enable auto-play
+                  enlargeCenterPage: true, // Increase the size of the center item
+                  enableInfiniteScroll: true, // Enable infinite scroll
+                  onPageChanged: (index, reason) {
+                    // Optional callback when the page changes
+                    // You can use it to update any additional UI components
+                  },
+                ),
+              ),
+              ]
+    ));
   }
 }
 
