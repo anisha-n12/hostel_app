@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
+import 'package:hostel_app/pages/studentpage.dart';
+import 'package:hostel_app/shared/constants.dart';
+import 'package:hostel_app/widgets/widgets.dart';
 import 'package:marquee/marquee.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants.primaryColor,
         title: const Text(
           "Home",
           style: TextStyle(
@@ -51,7 +54,10 @@ class _HomePageState extends State<HomePage> {
                   width: 320,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    nextScreenReplace(
+                      context, StudentPage());
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
@@ -74,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Constants.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
