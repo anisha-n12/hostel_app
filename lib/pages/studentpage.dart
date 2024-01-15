@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -14,20 +15,20 @@ class _StudentPageState extends State<StudentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Constants.primaryColor,
-        title: const Text(
-          "Welcome Student",
-          style: TextStyle(
-            fontSize: 27,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Constants.primaryColor,
+          title: const Text(
+            "Welcome Student",
+            style: TextStyle(
+              fontSize: 27,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      drawer: Drawer(
-        backgroundColor: Constants.secondaryColor,
+        drawer: Drawer(
+          backgroundColor: Constants.secondaryColor,
           child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 50),
             children: <Widget>[
@@ -41,9 +42,11 @@ class _StudentPageState extends State<StudentPage> {
               ),
               Text(
                 "Username",
-                
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 20),
               ),
               const SizedBox(
                 height: 30,
@@ -57,40 +60,51 @@ class _StudentPageState extends State<StudentPage> {
                 selected: true,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(Icons.account_circle, color: Colors.white,),
-                title:
-                    const Text("View Profile", style: TextStyle(color: Colors.white)),
+                leading: const Icon(
+                  Icons.account_circle,
+                  color: Colors.white,
+                ),
+                title: const Text("View Profile",
+                    style: TextStyle(color: Colors.white)),
               ),
               ListTile(
                 onTap: () {
-                  },
+                  nextScreen(context, ComplaintBox());
+                },
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(Icons.chat_bubble, color: Colors.white,),
+                leading: const Icon(
+                  Icons.chat_bubble,
+                  color: Colors.white,
+                ),
                 title: const Text("Complaint Box",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {
-                  },
+                onTap: () {},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(Icons.article_outlined, color: Colors.white,),
+                leading: const Icon(
+                  Icons.article_outlined,
+                  color: Colors.white,
+                ),
                 title: const Text("Room Change",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {
-                  },
+                onTap: () {},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(Icons.article_outlined, color: Colors.white,),
+                leading: const Icon(
+                  Icons.article_outlined,
+                  color: Colors.white,
+                ),
                 title: const Text("Leave Application",
                     style: TextStyle(color: Colors.white)),
               ),
@@ -109,13 +123,14 @@ class _StudentPageState extends State<StudentPage> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.cancel,),
+                              icon: Icon(
+                                Icons.cancel,
+                              ),
                               color: Colors.red,
                             ),
                             IconButton(
                               onPressed: () async {
-                                nextScreenReplace(
-                      context, HomePage());
+                                nextScreenReplace(context, HomePage());
                                 // await authService.signOut();
                                 // Navigator.of(context).pushAndRemoveUntil(
                                 //     MaterialPageRoute(
@@ -134,31 +149,25 @@ class _StudentPageState extends State<StudentPage> {
                 selected: false,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(Icons.exit_to_app, color: Colors.white,),
+                leading: const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                ),
                 title: const Text("Log out",
                     style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
         ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
+        body: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  width: 320,
+                  width: 200,
                 ),
-                
-          ],
-        ),
-          ]
-      ),)
-      
-    );
+              ]),
+        ));
   }
 }
-
-  
