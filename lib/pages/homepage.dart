@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
+import 'package:hostel_app/pages/login_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   onPressed: () {
                     nextScreenReplace(
-                      context, StudentPage());
+                      context, LoginPage());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
