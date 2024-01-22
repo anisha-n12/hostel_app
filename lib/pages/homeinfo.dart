@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
 class HomeInfo extends StatefulWidget {
   const HomeInfo({super.key});
