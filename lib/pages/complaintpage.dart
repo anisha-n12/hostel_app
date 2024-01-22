@@ -24,6 +24,12 @@ class _ComplaintBoxState extends State<ComplaintBox> {
               color: Colors.black,
             ),
           ),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         ),
         body: Stack(children: <Widget>[
           // chatlist(),
