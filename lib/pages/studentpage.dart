@@ -98,7 +98,7 @@ class _StudentPageState extends State<StudentPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreenReplace(context, LeaveApp());
+                  nextScreen(context, LeaveApp());
                 },
                 selectedColor: Constants.primaryColor,
                 selected: false,

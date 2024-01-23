@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
 import 'package:hostel_app/pages/login_page.dart';
+import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    nextScreenReplace(
+                    nextScreen(
                       context, LoginPage());
                   },
                   style: ElevatedButton.styleFrom(
@@ -125,6 +126,7 @@ class _FormsPageState extends State<FormsPage> {
                 child: InkWell(
                   splashColor: Colors.blue.withAlpha(30),
                   onTap: () {
+                    nextScreen(context, Register_Page());
                   },
                   child: const ListTile(
                     leading: Icon(Icons.article_rounded),
