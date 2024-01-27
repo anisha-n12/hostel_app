@@ -11,9 +11,10 @@ class LeaveApp extends StatefulWidget {
 }
 
 class _LeaveAppState extends State<LeaveApp> {
-  DateTime selectedDate = DateTime.now();
+  DateTime departureSelectedDate = DateTime.now();
+  DateTime arrivalSelectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context, DateTime selectedDate) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -199,12 +200,12 @@ class _LeaveAppState extends State<LeaveApp> {
               ),
               const SizedBox(height: 10),
               GestureDetector(
-                onTap: () => _selectDate(context),
+                onTap: () => _selectDate(context, departureSelectedDate),
                 child: AbsorbPointer(
                   child: TextFormField(
                     readOnly: true,
                     controller: TextEditingController(
-                      text: "${selectedDate.toLocal()}".split(' ')[0],
+                      text: "${departureSelectedDate.toLocal()}".split(' ')[0],
                     ),
                     decoration: textInputDecoration.copyWith(
                       labelText: "Select Date",
@@ -226,12 +227,12 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: () => _selectDate(context),
+                onTap: () => _selectDate(context, arrivalSelectedDate),
                 child: AbsorbPointer(
                   child: TextFormField(
                     readOnly: true,
                     controller: TextEditingController(
-                      text: "${selectedDate.toLocal()}".split(' ')[0],
+                      text: "${arrivalSelectedDate.toLocal()}".split(' ')[0],
                     ),
                     decoration: textInputDecoration.copyWith(
                       labelText: "Select Date",
