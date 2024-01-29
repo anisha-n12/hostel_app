@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
 import 'package:hostel_app/pages/forget_psw.dart';
-// import 'package:hostel_app/pages/home_page.dart';
 import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/widgets/widgets.dart';

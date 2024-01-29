@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/login_page.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
 class Register_Page extends StatefulWidget {
@@ -15,10 +16,25 @@ class _Register_PageState extends State<Register_Page> {
   String programDropDown = "Select your Program";
   String categoryDropDown = "Select your category";
   String yearDropDown = "Select your year";
+  String genderselected = "Select your gender";
   bool _agreedTo = false;
   final _formKey = GlobalKey<FormState>();
   DateTime admissionSelectedDate = DateTime.now();
-
+  String name = "";
+  String email = "";
+  String mobile = "";
+  String address = "";
+  String gender = "";
+  String parentName = "";
+  String parentMobile = "";
+  String regId = "";
+  String program = "";
+  String branch = "";
+  String year = "";
+  String category = "";
+  DateTime admissionDate = DateTime.now();
+  String guardianName = "";
+  String guardianMobile = "";
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -31,6 +47,7 @@ class _Register_PageState extends State<Register_Page> {
       setState(() {
         admissionSelectedDate = picked;
       });
+      admissionDate = admissionSelectedDate;
     }
   }
 
@@ -117,6 +134,9 @@ class _Register_PageState extends State<Register_Page> {
                               return null;
                             }
                           },
+                          onChanged: (value) {
+                            name = value;
+                          },
                           decoration: const InputDecoration(
                             labelText: "Name",
                             labelStyle: TextStyle(
@@ -146,6 +166,9 @@ class _Register_PageState extends State<Register_Page> {
                       children: [
                         TextFormField(
                           validator: validateEmail,
+                          onChanged: (value) {
+                            email = value;
+                          },
                           decoration: const InputDecoration(
                             labelText: "Email",
                             labelStyle: TextStyle(
@@ -182,6 +205,9 @@ class _Register_PageState extends State<Register_Page> {
                           //     return null;
                           //   }
                           // },
+                          onChanged: (value) {
+                            mobile = value;
+                          },
                           validator: (value) {
                             if (value!.isEmpty ||
                                 !RegExp(r'^(\+91[\s-]?)?(\d{10})$')
@@ -225,6 +251,9 @@ class _Register_PageState extends State<Register_Page> {
                             }
                             return null;
                           },
+                          onChanged: (value) {
+                            address = value;
+                          },
                           maxLines: 5,
                           // obscureText: true,
                           decoration: const InputDecoration(
@@ -249,6 +278,58 @@ class _Register_PageState extends State<Register_Page> {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  Container(
+                    width: 363,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 253, 208),
+                      border: Border.all(color: Colors.black, width: 1.0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: genderselected,
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                            ),
+                            style: const TextStyle(color: Colors.black),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                genderselected = newValue!;
+                              });
+                              gender = newValue!;
+                            },
+                            items: const [
+                              DropdownMenuItem<String>(
+                                value: "Select your gender",
+                                child: Text("Select your gender"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "Male",
+                                child: Text("Male"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "Female",
+                                child: Text("Female"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "Other",
+                                child: Text("Otehr"),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Add a spacer
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(
@@ -260,6 +341,9 @@ class _Register_PageState extends State<Register_Page> {
                               return 'Please enter some text';
                             }
                             return null;
+                          },
+                          onChanged: (value) {
+                            parentName = value;
                           },
                           decoration: const InputDecoration(
                             labelText: "Parent's Name",
@@ -299,6 +383,9 @@ class _Register_PageState extends State<Register_Page> {
                               return null;
                             }
                           },
+                          onChanged: (value) {
+                            parentMobile = value;
+                          },
                           decoration: const InputDecoration(
                             labelText: "Parent's Contact",
                             labelStyle: TextStyle(
@@ -334,6 +421,9 @@ class _Register_PageState extends State<Register_Page> {
                             } else {
                               return null;
                             }
+                          },
+                          onChanged: (value) {
+                            regId = value;
                           },
                           decoration: const InputDecoration(
                             labelText: "Registration ID",
@@ -382,6 +472,7 @@ class _Register_PageState extends State<Register_Page> {
                               setState(() {
                                 programDropDown = newValue!;
                               });
+                              program = newValue!;
                             },
                             items: const [
                               DropdownMenuItem<String>(
@@ -428,6 +519,9 @@ class _Register_PageState extends State<Register_Page> {
                               return 'Please enter some text';
                             }
                             return null;
+                          },
+                          onChanged: (value) {
+                            branch = value;
                           },
                           decoration: const InputDecoration(
                             labelText: "Branch",
@@ -476,6 +570,7 @@ class _Register_PageState extends State<Register_Page> {
                               setState(() {
                                 yearDropDown = newValue!;
                               });
+                              year = newValue!;
                             },
                             items: const [
                               DropdownMenuItem<String>(
@@ -532,6 +627,7 @@ class _Register_PageState extends State<Register_Page> {
                               setState(() {
                                 categoryDropDown = newValue!;
                               });
+                              category = newValue!;
                             },
                             items: const [
                               DropdownMenuItem<String>(
@@ -614,6 +710,9 @@ class _Register_PageState extends State<Register_Page> {
                             }
                             return null;
                           },
+                          onChanged: (value) {
+                            guardianName = value;
+                          },
                           decoration: const InputDecoration(
                             labelText: "Local Guardian",
                             labelStyle: TextStyle(
@@ -651,6 +750,9 @@ class _Register_PageState extends State<Register_Page> {
                             } else {
                               return null;
                             }
+                          },
+                          onChanged: (value) {
+                            guardianMobile = value;
                           },
                           decoration: const InputDecoration(
                             labelText: "Guardian's Contact",
@@ -703,12 +805,31 @@ class _Register_PageState extends State<Register_Page> {
                     onPressed: () {
                       if (_formKey.currentState!.validate() && _agreedTo) {
                         // Validation successful, navigate to home page
+                        DatabaseService.addStudentData(
+                            name,
+                            email,
+                            mobile,
+                            address,
+                            gender,
+                            parentName,
+                            parentMobile,
+                            regId,
+                            program,
+                            branch,
+                            year,
+                            category,
+                            admissionDate,
+                            guardianName,
+                            guardianMobile);
+                        showSnackBar(context, Colors.green,
+                            "Student registered successfully!");
                         nextScreen(context, HomePage());
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            _agreedTo ? Color.fromARGB(255, 190, 124, 37): Colors.grey),
+                        backgroundColor: _agreedTo
+                            ? Color.fromARGB(255, 190, 124, 37)
+                            : Colors.grey),
                     child: const Text(
                       "Submit",
                       style: TextStyle(color: Colors.white),

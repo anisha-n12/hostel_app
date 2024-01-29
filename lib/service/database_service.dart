@@ -7,8 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 //   final CollectionReference complaintsCollection =
 //       FirebaseFirestore.instance.collection("complaints");
-  // final CollectionReference groupCollection =
-  //     FirebaseFirestore.instance.collection("groups");
+// final CollectionReference groupCollection =
+//     FirebaseFirestore.instance.collection("groups");
 
 //saving user data
 //   Future saveUserData(String fullname, String email) async {
@@ -109,21 +109,63 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //       });
 //       await groupDocumentReference.update({
 //         "groups": FieldValue.arrayUnion(["${uid}_$userName"])
-      // });
-    //   getChats(String groupId) async {
-    // return complaintsCollection
-    //     .doc(groupId)
-    //     .collection("messages")
-    //     .orderBy("time")
-    //     .snapshots();
-    //    }
-    // }
-  
+// });
+//   getChats(String groupId) async {
+// return complaintsCollection
+//     .doc(groupId)
+//     .collection("messages")
+//     .orderBy("time")
+//     .snapshots();
+//    }
+// }
 
-class DatabaseService{
+class DatabaseService {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  static Future<void> addStudentData(
+    String name,
+    String email,
+    String mobile,
+    String address,
+    String gender,
+    String parentName,
+    String parentMobile,
+    String regId,
+    String program,
+    String branch,
+    String year,
+    String category,
+    DateTime admissionDate,
+    String guardianName,
+    String guardianMobile,
+  ) async {
+    final CollectionReference studentCollection =
+        FirebaseFirestore.instance.collection("students");
 
-  FirebaseFirestore firestore= FirebaseFirestore.instance;
-Future addStudentData(String name, String email, String mobile, String address, String parentName, String parentMobile, String regId, String program, String branch, String year, String category, DateTime admissionDate, String guardianName, String guardianMobile ){
-  final CollectionReference studentCollection= firestore.collection("students");
-  return studentCollection.add({});
-}}
+    try {
+      await studentCollection.add({
+        "name": name,
+        "email": email,
+        "mobile": mobile,
+        "address": address,
+        "gender": gender,
+        "parentName": parentName,
+        "parentMobile": parentMobile,
+        "regId": regId,
+        "program": program,
+        "branch": branch,
+        "year": year,
+        "category": category,
+        "admissionDate": admissionDate,
+        "guardianName": guardianName,
+        "guardianMobile": guardianMobile,
+        "allotted": "No",
+        "loginID": "",
+        "password": ""
+      });
+      print("Student data added successfully");
+    } catch (e) {
+      print("Error adding student data: $e");
+      // Handle the error as needed
+    }
+  }
+}
