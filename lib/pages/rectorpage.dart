@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
+import 'package:hostel_app/pages/in_out_details.dart';
+import 'package:hostel_app/pages/leave_application_list.dart';
+import 'package:hostel_app/pages/roomchange_application_list.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
-class StudentPage extends StatefulWidget {
-  const StudentPage({super.key});
+class RectorPage extends StatefulWidget {
+  const RectorPage({super.key});
 
   @override
-  State<StudentPage> createState() => _StudentPageState();
+  State<RectorPage> createState() => _RectorPageState();
 }
 
-class _StudentPageState extends State<StudentPage> {
+class _RectorPageState extends State<RectorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +97,7 @@ class _StudentPageState extends State<StudentPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {nextScreen(context, ComplaintBox());},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -106,7 +110,7 @@ class _StudentPageState extends State<StudentPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {nextScreen(context,RoomChangeList());},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -119,7 +123,7 @@ class _StudentPageState extends State<StudentPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {nextScreen(context, InOutDetailsList());},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -132,7 +136,7 @@ class _StudentPageState extends State<StudentPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {nextScreen(context, LeaveList());},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
