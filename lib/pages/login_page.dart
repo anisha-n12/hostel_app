@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/forget_psw.dart';
+import 'package:hostel_app/pages/rectorpage.dart';
 // import 'package:hostel_app/pages/home_page.dart';
 import 'package:hostel_app/pages/reg_page.dart';
 import 'package:email_validator/email_validator.dart';
@@ -254,8 +255,8 @@ class _LoginPageState extends State<LoginPage> {
                                           isLoading = false;
                                         });
 
-                                        nextScreenReplace(context, StudentPage()
-                                        );
+                                        nextScreenReplace(
+                                            context, RectorPage());
                                       },
                                     );
                                   }
@@ -282,7 +283,7 @@ class _LoginPageState extends State<LoginPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const Register_Page(),
+                                              const StudentPage(),
                                         ),
                                       );
                                     },

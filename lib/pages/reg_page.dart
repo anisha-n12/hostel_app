@@ -708,7 +708,7 @@ class _Register_PageState extends State<Register_Page> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 190, 124, 37)),
+                            _agreedTo ? Color.fromARGB(255, 190, 124, 37): Colors.grey),
                     child: const Text(
                       "Submit",
                       style: TextStyle(color: Colors.white),

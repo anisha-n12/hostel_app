@@ -1,4 +1,4 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // class DatabaseService {
 //   final String? uid;
@@ -119,3 +119,11 @@
     //    }
     // }
   
+
+class DatabaseService{
+
+  FirebaseFirestore firestore= FirebaseFirestore.instance;
+Future addStudentData(String name, String email, String mobile, String address, String parentName, String parentMobile, String regId, String program, String branch, String year, String category, DateTime admissionDate, String guardianName, String guardianMobile ){
+  final CollectionReference studentCollection= firestore.collection("students");
+  return studentCollection.add({});
+}}
