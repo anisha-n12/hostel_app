@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
+import 'package:hostel_app/pages/rectorRegistration.dart';
 import 'package:hostel_app/pages/studentallotment.dart';
+import 'package:hostel_app/pages/wardenRegistration.dart';
 // import 'package:hostel_app/pages/leaveapplication.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -57,7 +59,9 @@ class _AdminPageState extends State<AdminPage> {
                 height: 2,
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  nextScreen(context, WardenRegistration());
+                },
                 selectedColor: Constants.primaryColor,
                 selected: true,
                 contentPadding:
@@ -71,7 +75,7 @@ class _AdminPageState extends State<AdminPage> {
               ),
               ListTile(
                 onTap: () {
-                  // nextScreen(context, ComplaintBox());
+                  nextScreen(context, RegisterRector());
                 },
                 selectedColor: Constants.primaryColor,
                 selected: false,
