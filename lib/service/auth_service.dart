@@ -5,21 +5,21 @@ import 'package:hostel_app/service/database_service.dart';
 // class AuthService {
 //   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-//   Future registerUserWithEmailandPassword(
-//       String fullname, String email, String password) async {
-//     try {
-//       if (fullname != null && email != null && password != null) {
-//         User user = (await firebaseAuth.createUserWithEmailAndPassword(
-//                 email: email, password: password))
-//             .user!;
-//         await DatabaseService(uid: user.uid).saveUserData(fullname, email);
-//         return true;
-//       }
-//     } on FirebaseAuthException catch (e) {
-//       // print(e);
-//       return e.message;
-//     }
-//   }
+  // Future registerUserWithEmailandPassword(
+  //     String fullname, String email, String password) async {
+  //   try {
+  //     if (fullname != null && email != null && password != null) {
+  //       User user = (await firebaseAuth.createUserWithEmailAndPassword(
+  //               email: email, password: password))
+  //           .user!;
+  //       await DatabaseService(uid: user.uid).saveUserData(fullname, email);
+  //       return true;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     // print(e);
+  //     return e.message;
+  //   }
+  // }
 
 //   Future signOut() async {
 //     try {

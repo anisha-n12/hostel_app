@@ -168,8 +168,35 @@ class _StudentPageState extends State<StudentPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  width: 200,
+                  height: 200,
                 ),
+                Builder(builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            textColor: Colors.white,
+                            title: Text("12/09/2023"),
+                            titleTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                            subtitle: Text("Wednesday, 9:48 pm"),
+                            subtitleTextStyle: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                            enabled: false,
+                            tileColor: Colors.green,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }),
               ]),
         ));
   }
