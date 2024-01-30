@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/getdata.dart';
+import 'package:hostel_app/pages/getinoutdata.dart';
 import 'package:hostel_app/pages/guestRecord.dart';
 import 'package:hostel_app/pages/in_out_details.dart';
 import 'package:hostel_app/pages/roomchange_application_list.dart';
@@ -157,7 +158,7 @@ class _StudentPageState extends State<RectorPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreen(context, InOutDetailsList());
+                  nextScreen(context, GetInOutData());
                 },
                 selectedColor: primaryColor,
                 selected: false,
@@ -168,19 +169,6 @@ class _StudentPageState extends State<RectorPage> {
                   color: Colors.white,
                 ),
                 title: const Text("In/Out Entries",
-                    style: TextStyle(color: Colors.white)),
-              ),
-              ListTile(
-                onTap: () {},
-                selectedColor: primaryColor,
-                selected: false,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(
-                  Icons.article_outlined,
-                  color: Colors.white,
-                ),
-                title: const Text("Leave Application",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(

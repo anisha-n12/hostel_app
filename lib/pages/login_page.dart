@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
 import 'package:hostel_app/pages/adminpage.dart';
 import 'package:hostel_app/pages/forget_psw.dart';
-import 'package:hostel_app/pages/home_page.dart';
+import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/rector.dart';
 import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
@@ -257,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
                                         });
 
                                         nextScreenReplace(
-                                            context, StudentPage());
+                                            context, const RectorPage());
                                       },
                                     );
                                   }
