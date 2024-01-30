@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/guest_form.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
 import 'package:hostel_app/pages/login_page.dart';
+import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -56,8 +58,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    nextScreenReplace(
-                      context, LoginPage());
+                    nextScreen(context, LoginPage());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -105,7 +106,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
 class FormsPage extends StatefulWidget {
   const FormsPage({super.key});
 
@@ -118,36 +118,44 @@ class _FormsPageState extends State<FormsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-            Card(
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                  },
-                  child: const ListTile(
-                    leading: Icon(Icons.article_rounded),
-                    title: Text("Registration form", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,)),
-                    subtitle: Text("Register for the allotment procedure"),
-                  ),
-                ),
+      child: Column(children: [
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, Register_Page());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.article_rounded),
+              title: Text("Registration form",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text("Register for the allotment procedure"),
             ),
-            Card(
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                  },
-                  child: const ListTile(
-                    leading: Icon(Icons.article_rounded),
-                    title: Text("Guest form", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,)),
-                    subtitle: Text("Apply for guest room allotment"),
-                  ),
-                ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.article_rounded),
+              title: Text("Guest form",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text("Apply for guest room allotment"),
             ),
-        ]
-      ),
+          ),
+        ),
+      ]),
     );
   }
 }

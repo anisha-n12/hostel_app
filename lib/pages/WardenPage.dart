@@ -1,20 +1,21 @@
+// ignore: file_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
-import 'package:hostel_app/pages/in_out_details.dart';
-import 'package:hostel_app/pages/leave_application_list.dart';
-import 'package:hostel_app/pages/roomchange_application_list.dart';
+import 'package:hostel_app/pages/leaveapplication.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
-class RectorPage extends StatefulWidget {
-  const RectorPage({super.key});
+class WardenPage extends StatefulWidget {
+  const WardenPage({super.key});
 
   @override
-  State<RectorPage> createState() => _RectorPageState();
+  State<WardenPage> createState() => _WardenPageState();
 }
 
-class _RectorPageState extends State<RectorPage> {
+class _WardenPageState extends State<WardenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,7 @@ class _RectorPageState extends State<RectorPage> {
           elevation: 0,
           backgroundColor: Constants.primaryColor,
           title: const Text(
-            "Welcome Rector--1",
+            "Welcome Warden ABC",
             style: TextStyle(
               fontSize: 27,
               fontWeight: FontWeight.bold,
@@ -71,6 +72,21 @@ class _RectorPageState extends State<RectorPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
+                onTap: () {
+                  nextScreen(context, ComplaintBox());
+                },
+                selectedColor: Constants.primaryColor,
+                selected: false,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                leading: const Icon(
+                  Icons.article_outlined,
+                  color: Colors.white,
+                ),
+                title: const Text("BLOCK A",
+                    style: TextStyle(color: Colors.white)),
+              ),
+              ListTile(
                 onTap: () {},
                 selectedColor: Constants.primaryColor,
                 selected: false,
@@ -80,7 +96,7 @@ class _RectorPageState extends State<RectorPage> {
                   Icons.article_outlined,
                   color: Colors.white,
                 ),
-                title: const Text("Guest record",
+                title: const Text("BLOCK B",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
@@ -93,24 +109,11 @@ class _RectorPageState extends State<RectorPage> {
                   Icons.article_outlined,
                   color: Colors.white,
                 ),
-                title: const Text("Allotments",
+                title: const Text("BLOCK C",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {nextScreen(context, ComplaintBox());},
-                selectedColor: Constants.primaryColor,
-                selected: false,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                leading: const Icon(
-                  Icons.chat_bubble,
-                  color: Colors.white,
-                ),
-                title: const Text("Complaint Box",
-                    style: TextStyle(color: Colors.white)),
-              ),
-              ListTile(
-                onTap: () {nextScreen(context,RoomChangeList());},
+                onTap: () {},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -119,11 +122,12 @@ class _RectorPageState extends State<RectorPage> {
                   Icons.article_outlined,
                   color: Colors.white,
                 ),
-                title: const Text("Room Change Applications",
+                title: const Text("BLOCK D",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {nextScreen(context, InOutDetailsList());},
+                tileColor: Colors.blueGrey,
+                onTap: () {},
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -132,11 +136,13 @@ class _RectorPageState extends State<RectorPage> {
                   Icons.article_outlined,
                   color: Colors.white,
                 ),
-                title: const Text("In out Entries",
+                title: const Text("BLOCK E",
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {nextScreen(context, LeaveList());},
+                onTap: () {
+                  nextScreenReplace(context, LeaveApp());
+                },
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:
@@ -204,12 +210,109 @@ class _RectorPageState extends State<RectorPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 320,
-                    ),
-                  ],
+                // const SizedBox(
+                //   width: 200,
+                // ),
+                Image.asset(
+                  "lib/assets/images/vjti1.png",
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.topCenter,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  color: Constants.secondaryColor,
+                  width: 400.0,
+                  height: 50.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "lib/assets/images/hurry.png",
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.topCenter,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Mark Attendance",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  color: Constants.secondaryColor,
+                  width: 400.0,
+                  height: 50.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "lib/assets/images/hurry.png",
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.topCenter,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Guest List",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  color: Constants.secondaryColor,
+                  width: 400.0,
+                  height: 50.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "lib/assets/images/hurry.png",
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.topCenter,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Complaint box",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ]),
         ));
