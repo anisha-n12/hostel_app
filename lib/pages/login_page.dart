@@ -205,8 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AdminPage(),
+                                        builder: (context) => const AdminPage(),
                                       ),
                                     );
                                   },
@@ -255,8 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                           isLoading = false;
                                         });
 
-                                        nextScreenReplace(context, StudentPage()
-                                        );
+                                        nextScreenReplace(context, AdminPage());
                                       },
                                     );
                                   }
