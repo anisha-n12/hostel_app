@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
+import 'package:hostel_app/pages/attendancePage.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/shared/constants.dart';
 
@@ -32,8 +33,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      // home: const HomePage(),
-      home: const WardenPage(),
+      home: const HomePage(),
+     
     );
   }
 }
