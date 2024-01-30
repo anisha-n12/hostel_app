@@ -17,7 +17,7 @@ class _Register_PageState extends State<Register_Page> {
   String categoryDropDown = "Select your category";
   String yearDropDown = "Select your year";
   String genderselected = "Select your gender";
-  String seatTypeDropDown= "Select Seat Type";
+  String seatTypeDropDown = "Select Seat Type";
   bool _agreedTo = false;
   final _formKey = GlobalKey<FormState>();
   DateTime admissionSelectedDate = DateTime.now();
@@ -31,9 +31,9 @@ class _Register_PageState extends State<Register_Page> {
   String pinCode = "";
   String locality = "";
   String gender = "";
-  String generalMeritNo="";
+  String generalMeritNo = "";
   String parentName = "";
-  String seatType="";
+  String seatType = "";
   String parentMobile = "";
   String regId = "";
   String program = "";
@@ -247,193 +247,235 @@ class _Register_PageState extends State<Register_Page> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your home address';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      homeAddress = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Home Address",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter Home Address",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your home address';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                homeAddress = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "Home Address",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter Home Address",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the building/block number';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      buildingNo = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Building/Block No.",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter Building/Block No.",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the building/block number';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                buildingNo = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "Building/Block No.",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter Building/Block No.",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the locality';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      locality = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Locality",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter Locality",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the locality';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                locality = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "Locality",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter Locality",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the district';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      district = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "District",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter District",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the district';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                district = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "District",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter District",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the city';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      city = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "City",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter City",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the city';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                city = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "City",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter City",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   SizedBox(height: 16),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the pin code';
-                      } else if (value.length != 6) {
-                        return 'Pin code must have exactly 6 digits';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      pinCode = value;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Pin Code",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintText: "Enter Pin Code",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 255, 253, 208),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 10.0,
-                      ),
-                    ),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the pin code';
+                                } else if (value.length != 6) {
+                                  return 'Pin code must have exactly 6 digits';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                pinCode = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "Pin Code",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter Pin Code",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   const SizedBox(height: 16),
                   Container(
                     width: 363,
@@ -759,110 +801,119 @@ class _Register_PageState extends State<Register_Page> {
                     ),
                   ),
                   const SizedBox(height: 16),
-Container(
-  width: 363,
-  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-  decoration: BoxDecoration(
-    color: const Color.fromARGB(255, 255, 253, 208),
-    border: Border.all(color: Colors.black, width: 1.0),
-    borderRadius: BorderRadius.circular(15),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(
-        child: DropdownButton<String>(
-          isExpanded: true,
-          value: seatTypeDropDown,
-          icon: const Icon(
-            Icons.arrow_drop_down,
-          ),
-          style: const TextStyle(color: Colors.black),
-          onChanged: (String? newValue) {
-            setState(() {
-              seatTypeDropDown = newValue!;
-            });
-            seatType = newValue!;
-          },
-          items: const [
-            DropdownMenuItem<String>(
-              value: "Select Seat Type",
-              child: Text("Select Seat Type"),
-            ),
-            DropdownMenuItem<String>(
-              value: "GOPEN",
-              child: Text("GOPEN"),
-            ),
-            DropdownMenuItem<String>(
-              value: "LOPEN",
-              child: Text("LOPEN"),
-            ),
-            DropdownMenuItem<String>(
-              value: "GOBC",
-              child: Text("GOBC"),
-            ),
-            DropdownMenuItem<String>(
-              value: "LOBC",
-              child: Text("LOBC"),
-            ),
-            DropdownMenuItem<String>(
-              value: "SC/ST",
-              child: Text("SC/ST"),
-            ),
-            DropdownMenuItem<String>(
-              value: "NT-(A/B/C/D)",
-              child: Text("NT-(A/B/C/D)"),
-            ),
-            DropdownMenuItem<String>(
-              value: "Minority",
-              child: Text("Minority"),
-            ),
-            DropdownMenuItem<String>(
-              value: "PWD",
-              child: Text("PWD"),
-            ),
-          ],
-        ),
-      ),
-      // Add a spacer
-      const SizedBox(width: 8),
-    ],
-  ),
-),
+                  Container(
+                    width: 363,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 253, 208),
+                      border: Border.all(color: Colors.black, width: 1.0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: seatTypeDropDown,
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                            ),
+                            style: const TextStyle(color: Colors.black),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                seatTypeDropDown = newValue!;
+                              });
+                              seatType = newValue!;
+                            },
+                            items: const [
+                              DropdownMenuItem<String>(
+                                value: "Select Seat Type",
+                                child: Text("Select Seat Type"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "GOPEN",
+                                child: Text("GOPEN"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "LOPEN",
+                                child: Text("LOPEN"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "GOBC",
+                                child: Text("GOBC"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "LOBC",
+                                child: Text("LOBC"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "SC/ST",
+                                child: Text("SC/ST"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "NT-(A/B/C/D)",
+                                child: Text("NT-(A/B/C/D)"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "Minority",
+                                child: Text("Minority"),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: "PWD",
+                                child: Text("PWD"),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Add a spacer
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ),
 
                   SizedBox(height: 16),
-      TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please enter the General Merit No.';
-          } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-            return 'Please enter only digits';
-          }
-          return null;
-        },
-        onChanged: (value) {
-          generalMeritNo = value;
-        },
-        decoration: const InputDecoration(
-          labelText: "General Merit No.",
-          labelStyle: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-          ),
-          hintText: "Enter General Merit No.",
-          filled: true,
-          fillColor: Color.fromARGB(255, 255, 253, 208),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 1.0),
-          ),
-          hintStyle: TextStyle(color: Colors.grey),
-          contentPadding: EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 10.0,
-          ),
-        ),
-      ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the General Merit No.';
+                                } else if (!RegExp(r'^[0-9]+$')
+                                    .hasMatch(value)) {
+                                  return 'Please enter only digits';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                generalMeritNo = value;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "General Merit No.",
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                hintText: "Enter General Merit No.",
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 253, 208),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 1.0),
+                                ),
+                                hintStyle: TextStyle(color: Colors.grey),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10.0,
+                                  horizontal: 10.0,
+                                ),
+                              ),
+                            ),
+                          ])),
                   const SizedBox(height: 16),
                   Container(
                     width: 363,
