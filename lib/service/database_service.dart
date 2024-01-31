@@ -219,6 +219,36 @@ class DatabaseService {
     }
   }
 
+  //Adding Rooma Change data
+  static Future<void> addRoomChangeData(
+      String name,
+      String desiredHostel,
+      String course,
+      String reason,
+      String room,
+      bool isAccepeted,
+      bool done) async {
+    final CollectionReference roomChangeDataCollection =
+        FirebaseFirestore.instance.collection("room_change_data");
+
+    try {
+      await roomChangeDataCollection.add({
+        "name": name,
+        "desiredHostel": desiredHostel,
+        "course": course,
+        "reason": reason,
+        "room": room,
+        "isAccepted": false,
+        "done": false
+      });
+      print("Room Change Application data added successfully");
+    } catch (e) {
+      print("Error adding data: $e");
+      // Handle the error as needed
+    }
+  }
+  ////=================================
+
   static Future<void> addInOutData(
     String name,
     String studentContact,

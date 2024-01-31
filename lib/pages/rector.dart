@@ -4,6 +4,7 @@ import 'package:hostel_app/pages/getinoutdata.dart';
 import 'package:hostel_app/pages/guestRecord.dart';
 import 'package:hostel_app/pages/in_out_details.dart';
 import 'package:hostel_app/pages/rectorProfile.dart';
+import 'package:hostel_app/pages/room_change_list.dart';
 import 'package:hostel_app/pages/roomchange_application_list.dart';
 // import 'package:hostel_app/pages/complaintpage.dart';
 // import 'package:hostel_app/pages/homepage.dart';
@@ -118,7 +119,7 @@ class _StudentPageState extends State<RectorPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreen(context, const RoomChangeList());
+                  nextScreen(context, RoomChangeList());
                 },
                 selectedColor: primaryColor,
                 selected: false,
