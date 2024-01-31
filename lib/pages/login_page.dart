@@ -256,8 +256,25 @@ class _LoginPageState extends State<LoginPage> {
                                           isLoading = false;
                                         });
 
-                                        nextScreenReplace(
-                                            context, const RectorPage());
+                                        if (dropDownValue == 'Student') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StudentPage()));
+                                        } else if (dropDownValue == 'Rector') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RectorPage()));
+                                        } else if (dropDownValue == 'Warden') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      WardenPage()));
+                                        }
                                       },
                                     );
                                   }
