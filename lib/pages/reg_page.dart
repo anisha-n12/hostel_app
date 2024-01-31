@@ -40,7 +40,7 @@ class _Register_PageState extends State<Register_Page> {
   String branch = "";
   String year = "";
   String category = "";
-  DateTime admissionDate = DateTime.now();
+  String admissionDate = "";
   String guardianName = "";
   String guardianMobile = "";
   Future<void> _selectDate(BuildContext context) async {
@@ -55,7 +55,7 @@ class _Register_PageState extends State<Register_Page> {
       setState(() {
         admissionSelectedDate = picked;
       });
-      admissionDate = admissionSelectedDate;
+      admissionDate = "${admissionSelectedDate.toLocal()}".split(' ')[0];
     }
   }
 

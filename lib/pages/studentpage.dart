@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
@@ -13,6 +14,17 @@ class StudentPage extends StatefulWidget {
 }
 
 class _StudentPageState extends State<StudentPage> {
+  String name = "";
+  String room = "";
+  String placeToVisit = "";
+  String mobilenum = "";
+  String parent_contact = "";
+  String reason = "";
+  DateTime inTimeStamp = DateTime.now();
+  DateTime outTimeStamp = DateTime.now();
+  bool indone = false;
+  bool outdone = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,12 +205,286 @@ class _StudentPageState extends State<StudentPage> {
                             tileColor: Colors.green,
                           ),
                           SizedBox(height: 300),
-                          
                         ],
                       ),
                     ),
                   );
                 }),
+                const SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 30),
+                      const Center(
+                        child: Text(
+                          "MARK IN/OUT",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Name :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                            return 'Enter Correct Name';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: TextEditingController(
+                          text: name,
+                        ),
+                        onChanged: (value) {
+                          name = value;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Name",
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Student Contact :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        onChanged: (value) {
+                          mobilenum = value;
+                        },
+                        controller: TextEditingController(
+                          text: mobilenum,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^(\+91[\s-]?)?(\d{10})$')
+                                  .hasMatch(value)) {
+                            return 'Enter Correct Contact';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Student Contact",
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Room number :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^\d{10}$').hasMatch(value)) {
+                            return 'Enter Room number!';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: TextEditingController(
+                          text: room,
+                        ),
+                        onChanged: (value) {
+                          room = value;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Room number",
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Location :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'This field can\'t be empty!';
+                          }
+                          return null;
+                        },
+                        controller: TextEditingController(
+                          text: placeToVisit,
+                        ),
+                        onChanged: (value) {
+                          placeToVisit = value;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Location",
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Reason :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: TextEditingController(
+                          text: reason,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'This field can\'t be empty!';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          reason = value;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Reason",
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Parent Contact :",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: TextEditingController(
+                          text: parent_contact,
+                        ),
+                        onChanged: (value) {
+                          parent_contact = value;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^(\+91[\s-]?)?(\d{10})$')
+                                  .hasMatch(value)) {
+                            return 'Enter Correct Parent Contact';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: textInputDecoration.copyWith(
+                          labelText: "Parent Contact",
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      ElevatedButton(
+                        onPressed: () async {
+                          DatabaseService.addInOutData(name, mobilenum, room,
+                              placeToVisit, reason, parent_contact);
+                          showSnackBar(context, Colors.green,
+                              "Successfully added entry!\nPlease mark yourself In/Out...");
+                          // nextScreenReplace(context, StudentPage());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text(
+                          "Add entry",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                                readOnly: true,
+                                controller: TextEditingController(
+                                  text: indone
+                                      ? "${inTimeStamp.toLocal()}".split(' ')[0]
+                                      : "",
+                                ),
+                                decoration: textInputDecoration.copyWith(
+                                    labelText: "Click button to mark IN")),
+                          ),
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              inTimeStamp = DateTime.now();
+                              indone = true;
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: Text("Mark me IN   "),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                                readOnly: true,
+                                controller: TextEditingController(
+                                  text: outdone
+                                      ? "${outTimeStamp.toLocal()}"
+                                          .split(' ')[0]
+                                      : "",
+                                ),
+                                decoration: textInputDecoration.copyWith(
+                                    labelText: "Click button to mark OUT")),
+                          ),
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              outTimeStamp = DateTime.now();
+                              outdone = true;
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: Text("Mark me OUT"),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 50)
+                    ],
+                  ),
+                ),
               ]),
         ));
   }
