@@ -96,6 +96,10 @@ class _LoginPageState extends State<LoginPage> {
                             value: "Warden",
                             child: Text("Warden"),
                           ),
+                          DropdownMenuItem<String>(
+                            value: "Admin",
+                            child: Text("Admin"),
+                          ),
                         ],
                       ),
                     ),
@@ -262,7 +266,13 @@ class _LoginPageState extends State<LoginPage> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       StudentPage()));
-                                        } else if (dropDownValue == 'Rector') {
+                                        } else if (dropDownValue == 'Admin') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AdminPage()));
+                                        } else if (dropDownValue == 'Admin') {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
