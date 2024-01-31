@@ -23,9 +23,7 @@ class _HomeInfoState extends State<HomeInfo> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(
-            height: 200,
-          ),
+          NoticeBoard(),
           Container(
               child: Column(
             children: [
@@ -114,6 +112,93 @@ class _HomeInfoState extends State<HomeInfo> {
             ],
           )),
         ],
+      ),
+    );
+  }
+}
+
+class NoticeBoard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      padding: EdgeInsets.all(8),
+      color: Colors.grey[200], // Light grey background color
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Notice Board",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Dark grey color
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment against vacant seats",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment 2023",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Seat Matrix 2023",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel allotment dsy degree",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment 2022",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel fee structure updated",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
