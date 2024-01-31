@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black,
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -186,8 +187,172 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("ContactPage"),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(children: [
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, Register_Page());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("Head Rector",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text("Dr. Bambole - 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("Girls Hostel Rector",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" Dr. S. S. Suratkar- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("Boys Hostel Rector",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("A Block Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("B Block Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("C Block Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("D Block Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("E Block Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+        Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              nextScreen(context, GuestForm());
+            },
+            child: const ListTile(
+              leading: Icon(Icons.contact_page_outlined),
+              title: Text("PG Boys Hostel Incharge",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  )),
+              subtitle: Text(" XYZ- 1234567890"),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

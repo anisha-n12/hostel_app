@@ -256,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                                         });
 
                                         nextScreenReplace(
-                                            context, StudentPage());
+                                            context, RectorPage());
                                       },
                                     );
                                   }
