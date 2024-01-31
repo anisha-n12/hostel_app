@@ -1,142 +1,119 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/allotment_dialog.dart';
+import 'package:hostel_app/pages/rejection_dialog.dart'; // Import the rejection dialog
 
-class AllotStudentList extends StatefulWidget {
-  const AllotStudentList({Key? key}) : super(key: key);
-
-  @override
-  _AllotStudentListState createState() => _AllotStudentListState();
-}
-
-class _AllotStudentListState extends State<AllotStudentList> {
-  static const primaryColor = Color.fromARGB(255, 249, 249, 249);
-
-  // Sample list of in-out details
-  List<AllotStudent> inOutDetailsList = [
-    AllotStudent(
-      name: 'John Doe11',
-      date: '2022-03-01',
-      address: 'Sample Address',
-      gender: 'Male',
-      studentPhoneNumber: '123-456-7890',
-      category: 'Category A',
-      program: 'Sample Program',
-      branch: 'Sample Branch',
-      year: '1st',
-      regID: 'ABC123',
-    ),
-    // Add more in-out details as needed
-  ];
-
-  // Filtered list based on search query
-  List<AllotStudent> filteredDetails = [];
+class AllotStudentList extends StatelessWidget {
+  final CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: const Text('InOut Details'),
+        title: Text('Student Details'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             onPressed: () {
               showSearch(
-                  context: context,
-                  delegate: InOutDetailsSearch(inOutDetailsList));
+                context: context,
+                delegate: StudentSearchDelegate(students),
+              );
             },
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: filteredDetails.length == 0
-            ? inOutDetailsList.length
-            : filteredDetails.length,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: const EdgeInsets.all(8.0),
-            color: Colors.white.withOpacity(0.9),
-            child: ListTile(
-              title: Text(
-                filteredDetails.length == 0
-                    ? inOutDetailsList[index].name
-                    : filteredDetails[index].name,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              subtitle: Column(
+      body: FutureBuilder<QuerySnapshot>(
+        future: students.get(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+          List<Widget> studentDataWidgets =
+              snapshot.data!.docs.map((DocumentSnapshot document) {
+            Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+            // Access all the fields in each document
+            String regId = data['regId'].toString();
+            String name = data['name'].toString();
+            String email = data['email'].toString();
+            String mobile = data['mobile'].toString();
+            String branch = data['branch'].toString();
+            Timestamp admissionDate1 = data['admissionDate'] as Timestamp;
+            DateTime admissionDate = admissionDate1.toDate();
+
+            String year = data['year'].toString();
+            String category = data['category'].toString();
+            String gender = data['gender'].toString();
+            String parentName = data['parentName'].toString();
+            String parentMobile = data['parentMobile'].toString();
+            String guardianName = data['guardianName'].toString();
+            String guardianMobile = data['guardianMobile'].toString();
+            String address = data['address'].toString();
+            String allotted = data['allotted'].toString();
+
+            return Card(
+              margin: EdgeInsets.all(8.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 8.0),
-                  Text(
-                    'Date: ${filteredDetails.length == 0 ? inOutDetailsList[index].date : filteredDetails[index].date}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
+                  ListTile(
+                    title: Text("Registration ID: $regId"),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Name: $name"),
+                        Text("Email: $email"),
+                        Text("Mobile: $mobile"),
+                        Text("Branch: $branch"),
+                        Text("Admission Date: $admissionDate"),
+                        Text("Year: $year"),
+                        Text("Category: $category"),
+                        Text("Gender: $gender"),
+                        Text("Parent Name: $parentName"),
+                        Text("Parent Mobile: $parentMobile"),
+                        Text("Guardian Name: $guardianName"),
+                        Text("Guardian Mobile: $guardianMobile"),
+                        Text("Address: $address"),
+                        // Text("Allotted: $allotted"),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Address: ${filteredDetails.length == 0 ? inOutDetailsList[index].address : filteredDetails[index].address}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
-                  ),
-                  Text(
-                    'Gender: ${filteredDetails.length == 0 ? inOutDetailsList[index].gender : filteredDetails[index].gender}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
-                  ),
-                  Text(
-                    'Reg. ID: ${filteredDetails.length == 0 ? inOutDetailsList[index].regID : filteredDetails[index].regID}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
-                  ),
-                  Text(
-                    'Studies: ${filteredDetails.length == 0 ? inOutDetailsList[index].program : filteredDetails[index].program} | ${filteredDetails.length == 0 ? inOutDetailsList[index].branch : filteredDetails[index].branch} : ${filteredDetails.length == 0 ? inOutDetailsList[index].year : filteredDetails[index].year} year',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
-                  ),
-                  Text(
-                    'Student Phone Number: ${filteredDetails.length == 0 ? inOutDetailsList[index].studentPhoneNumber : filteredDetails[index].studentPhoneNumber}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
-                  ),
-                  Text(
-                    'Category: ${filteredDetails.length == 0 ? inOutDetailsList[index].category : filteredDetails[index].category}',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: const Color.fromARGB(255, 71, 71, 71),
-                    ),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle the Allot button click
+                          // Add your logic here
+                          showAllotmentDialog(context, name);
+                        },
+                        child: Text("Allot"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle the Reject button click
+                          // Add your logic here
+                          showRejectionDialog(context, name);
+                        },
+                        child: Text("Reject"),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              trailing: ElevatedButton(
-                onPressed: () {
-                  // Handle button tap
-                  // Add your logic for accepting the request
-                },
-                child: const Text('Accept'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            );
+          }).toList();
+
+          return ListView(
+            children: studentDataWidgets,
           );
         },
       ),
@@ -144,16 +121,16 @@ class _AllotStudentListState extends State<AllotStudentList> {
   }
 }
 
-class InOutDetailsSearch extends SearchDelegate<String> {
-  final List<AllotStudent> inOutDetailsList;
+class StudentSearchDelegate extends SearchDelegate<String> {
+  final CollectionReference students;
 
-  InOutDetailsSearch(this.inOutDetailsList);
+  StudentSearchDelegate(this.students);
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: const Icon(Icons.clear),
+        icon: Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -164,7 +141,7 @@ class InOutDetailsSearch extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back),
       onPressed: () {
         close(context, '');
       },
@@ -173,128 +150,172 @@ class InOutDetailsSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return _buildList(inOutDetailsList
-        .where((details) => details.name.contains(query))
-        .toList());
-  }
+    return FutureBuilder<QuerySnapshot>(
+      future: students.where('name', isEqualTo: query).get(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        }
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return _buildList(inOutDetailsList
-        .where((details) => details.name.contains(query))
-        .toList());
-  }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Searching...");
+        }
 
-  Widget _buildList(List<AllotStudent> results) {
-    return ListView.builder(
-      itemCount: results.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            results[index].name,
-            style: const TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+        if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
+          return Text("No results found");
+        }
+
+        // Build a list of widgets from the search results
+        List<Widget> searchResults =
+            snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+          // Access all the fields in each document
+          String regId = data['regId'].toString();
+          String name = data['name'].toString();
+          String email = data['email'].toString();
+          String mobile = data['mobile'].toString();
+          String branch = data['branch'].toString();
+          Timestamp admissionDate1 = data['admissionDate'] as Timestamp;
+          DateTime admissionDate = admissionDate1.toDate();
+
+          String year = data['year'].toString();
+          String category = data['category'].toString();
+          String gender = data['gender'].toString();
+          String parentName = data['parentName'].toString();
+          String parentMobile = data['parentMobile'].toString();
+          String guardianName = data['guardianName'].toString();
+          String guardianMobile = data['guardianMobile'].toString();
+          String address = data['address'].toString();
+          String allotted = data['allotted'].toString();
+
+          return Card(
+            margin: EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  title: Text("Registration ID: $regId"),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Name: $name"),
+                      Text("Email: $email"),
+                      Text("Mobile: $mobile"),
+                      Text("Branch: $branch"),
+                      Text("Admission Date: $admissionDate"),
+                      Text("Year: $year"),
+                      Text("Category: $category"),
+                      Text("Gender: $gender"),
+                      Text("Parent Name: $parentName"),
+                      Text("Parent Mobile: $parentMobile"),
+                      Text("Guardian Name: $guardianName"),
+                      Text("Guardian Mobile: $guardianMobile"),
+                      Text("Address: $address"),
+                      Text("Allotted: $allotted"),
+                    ],
+                  ),
+                ),
+                Divider(),
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle the Allot button click
+                    // Add your logic here
+
+                    showAllotmentDialog(context, name);
+                  },
+                  child: Text("Allot"),
+                ),
+              ],
             ),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8.0),
-              Text(
-                'Ad. Date: ${results[index].date}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Address: ${results[index].address}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Gender: ${results[index].gender}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Reg. ID: ${results[index].regID}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Studies: ${results[index].program} | ${results[index].branch} : ${results[index].year} year',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Student Phone Number: ${results[index].studentPhoneNumber}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'Category: ${results[index].category}',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          trailing: ElevatedButton(
-            onPressed: () {
-              // Handle button tap
-              // Add your logic for accepting the request
-            },
-            child: const Text('Accept'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.black,
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          );
+        }).toList();
+
+        return ListView(
+          children: searchResults,
         );
       },
     );
   }
-}
 
-class AllotStudent {
-  final String name;
-  final String date;
-  final String address;
-  final String gender;
-  final String studentPhoneNumber;
-  final String category;
-  final String program;
-  final String branch;
-  final String year;
-  final String regID;
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // If there are no search results, suggest recent searches or default suggestions
+    return FutureBuilder<QuerySnapshot>(
+      future: students
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThan: query + 'z')
+          .get(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        }
 
-  AllotStudent({
-    required this.name,
-    required this.date,
-    required this.address,
-    required this.gender,
-    required this.studentPhoneNumber,
-    required this.category,
-    required this.program,
-    required this.branch,
-    required this.year,
-    required this.regID,
-  });
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Searching...");
+        }
+
+        // Build a list of suggested names
+        List<String> suggestions =
+            snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+          return data['name'].toString();
+        }).toList();
+
+        return ListView.builder(
+          itemCount: suggestions.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(suggestions[index]),
+              onTap: () {
+                query = suggestions[index];
+                showResults(context);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void showRejectionDialog(BuildContext context, String studentName) {
+    String rejectionReason = '';
+
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Rejection for $studentName'),
+          content: Column(
+            children: [
+              TextField(
+                onChanged: (value) {
+                  rejectionReason = value;
+                },
+                decoration:
+                    InputDecoration(labelText: 'Enter Rejection Reason'),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle the rejection logic here
+                print(
+                    'Student $studentName rejected. Reason: $rejectionReason');
+                Navigator.of(context).pop();
+              },
+              child: Text('Reject'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
