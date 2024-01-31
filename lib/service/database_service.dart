@@ -141,7 +141,7 @@ class DatabaseService {
     String generalMeritNo,
     String seatType,
     String category,
-    DateTime admissionDate,
+    String admissionDate,
     String guardianName,
     String guardianMobile,
   ) async {
@@ -171,6 +171,7 @@ class DatabaseService {
         "category": category,
         "admissionDate": admissionDate,
         "guardianName": guardianName,
+        "generalmeritnum": generalMeritNo,
         "guardianMobile": guardianMobile,
         "allotted": "No",
         "loginID": "",
@@ -218,4 +219,77 @@ class DatabaseService {
     }
   }
 
+  static Future<void> addInOutData(
+    String name,
+    String studentContact,
+    String roomNumber,
+    String location,
+    String reason,
+    String parentContact,
+  ) async {
+    final CollectionReference inOutDataCollection =
+        FirebaseFirestore.instance.collection("in_out_data");
+
+    try {
+      await inOutDataCollection.add({
+        "name": name,
+        "studentContact": studentContact,
+        "roomNumber": roomNumber,
+        "location": location,
+        "reason": reason,
+        "parentContact": parentContact,
+        "inTime": "",
+        "outTime": ""
+      });
+      print("In/Out data added successfully");
+    } catch (e) {
+      print("Error adding In/Out data: $e");
+      // Handle the error as needed
+    }
+  }
+
+  static Future<void> addWardenData(
+    String RecOrWar,
+    String fullName,
+    String gender,
+    String age,
+    String contactNumber,
+    String email,
+    String city,
+    String state,
+    String education,
+    String workExperience,
+    String department,
+    String designation,
+    String emergencyContactNumber,
+    String username,
+    String password,
+  ) async {
+    final CollectionReference wardenDataCollection =
+        FirebaseFirestore.instance.collection("warden_data");
+
+    try {
+      await wardenDataCollection.add({
+        "Rector/Warden": RecOrWar,
+        "fullName": fullName,
+        "gender": gender,
+        "age": age,
+        "contactNumber": contactNumber,
+        "email": email,
+        "city": city,
+        "state": state,
+        "education": education,
+        "workExperience": workExperience,
+        "designation": designation,
+        "department": department,
+        "emergencyContactNumber": emergencyContactNumber,
+        "username": username,
+        "password": password,
+      });
+      print("Warden data added successfully");
+    } catch (e) {
+      print("Error adding Warden data: $e");
+      // Handle the error as needed
+    }
+  }
 }
