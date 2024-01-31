@@ -2,6 +2,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/complaintWarden.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
@@ -287,28 +288,34 @@ class _WardenPageState extends State<WardenPage> {
                   color: Constants.secondaryColor,
                   width: 400.0,
                   height: 50.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "lib/assets/images/hurry.png",
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.topCenter,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            "Complaint box",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigate to ComplaintWarden page
+                      nextScreen(context, ComplaintWarden());
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "lib/assets/images/hurry.png",
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.topCenter,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              "Complaint box",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(

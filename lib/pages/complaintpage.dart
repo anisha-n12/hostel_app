@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/shared/constants.dart';
 
@@ -25,11 +26,11 @@ class _ComplaintBoxState extends State<ComplaintBox> {
             ),
           ),
           leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
         body: Stack(children: <Widget>[
           // chatlist(),
@@ -54,8 +55,8 @@ class _ComplaintBoxState extends State<ComplaintBox> {
                       )),
                       const SizedBox(width: 12),
                       GestureDetector(
-                        onTap: (){
-                          // sendMessage();
+                        onTap: () {
+                          sendMessage();
                         },
                         child: Container(
                             height: 50,
@@ -64,7 +65,7 @@ class _ComplaintBoxState extends State<ComplaintBox> {
                                 color: Constants.primaryColor,
                                 borderRadius: BorderRadius.circular(20)),
                             child: const Center(
-                                child:  Icon(Icons.send, color: Colors.black))),
+                                child: Icon(Icons.send, color: Colors.black))),
                       )
                     ],
                   )))
@@ -74,5 +75,32 @@ class _ComplaintBoxState extends State<ComplaintBox> {
   chatlist() {
     // return StreamBuilder(stream: chats, builder: (context, AsyncSnapshot snapshot){})
   }
-  sendMessage(){}
+  sendMessage() async {
+    String messageText = messageController.text.trim();
+
+    if (messageText.isNotEmpty) {
+      // Access Firestore instance
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Add data to "complains" collection
+      await firestore.collection("complains").add({
+        "message": messageText,
+        // "timestamp": FieldValue.serverTimestamp(),
+        // Add any other fields you want to include
+      });
+
+      // Clear the message input field after sending
+      messageController.clear();
+      showNotification("Your complaint has been sent .");
+    }
+  }
+
+  void showNotification(String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 3), // You can adjust the duration
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
