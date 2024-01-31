@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
 import 'package:hostel_app/pages/adminpage.dart';
 import 'package:hostel_app/pages/forget_psw.dart';
+import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/rector.dart';
 import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
@@ -94,6 +95,10 @@ class _LoginPageState extends State<LoginPage> {
                           DropdownMenuItem<String>(
                             value: "Warden",
                             child: Text("Warden"),
+                          ),
+                          DropdownMenuItem<String>(
+                            value: "Admin",
+                            child: Text("Admin"),
                           ),
                         ],
                       ),
@@ -255,8 +260,31 @@ class _LoginPageState extends State<LoginPage> {
                                           isLoading = false;
                                         });
 
-                                        nextScreenReplace(
-                                            context, RectorPage());
+                                        if (dropDownValue == 'Student') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StudentPage()));
+                                        } else if (dropDownValue == 'Admin') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AdminPage()));
+                                        } else if (dropDownValue == 'Admin') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RectorPage()));
+                                        } else if (dropDownValue == 'Warden') {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      WardenPage()));
+                                        }
                                       },
                                     );
                                   }
