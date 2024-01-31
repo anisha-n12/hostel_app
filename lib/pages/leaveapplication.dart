@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/studentpage.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
@@ -13,18 +14,44 @@ class LeaveApp extends StatefulWidget {
 class _LeaveAppState extends State<LeaveApp> {
   DateTime departureSelectedDate = DateTime.now();
   DateTime arrivalSelectedDate = DateTime.now();
-
-  Future<void> _selectDate(BuildContext context, DateTime selectedDate) async {
+  String name = "";
+  String mobilenum = "";
+  String placeToVisit = "";
+  String personToVisit = "";
+  String guardian_contact = "";
+  String reason = "";
+  String duration = "";
+  String from = "";
+  String to = "";
+  String room = "";
+  Future<void> _arrivalselectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: arrivalSelectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != arrivalSelectedDate) {
       setState(() {
-        selectedDate = picked;
+        arrivalSelectedDate = picked;
+        to = "${arrivalSelectedDate.toLocal()}".split(' ')[0];
+      });
+    }
+  }
+
+  Future<void> _departselectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: departureSelectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != departureSelectedDate) {
+      setState(() {
+        departureSelectedDate = picked;
+        from = "${departureSelectedDate.toLocal()}".split(' ')[0];
       });
     }
   }
@@ -71,6 +98,17 @@ class _LeaveAppState extends State<LeaveApp> {
               ),
               TextFormField(
                 // obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                    return 'Enter Correct Name';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  name = value;
+                },
                 decoration: textInputDecoration.copyWith(
                   labelText: "Name",
                   // onChanged: ,
@@ -90,8 +128,48 @@ class _LeaveAppState extends State<LeaveApp> {
               ),
               TextFormField(
                 // obscureText: true,
+                onChanged: (value) {
+                  mobilenum = value;
+                },
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r'^(\+91[\s-]?)?(\d{10})$').hasMatch(value)) {
+                    return 'Enter Correct Contact';
+                  } else {
+                    return null;
+                  }
+                },
                 decoration: textInputDecoration.copyWith(
                   labelText: "Mobile",
+                  // onChanged: ,
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Text(
+                "Block and room number :",
+                style: TextStyle(
+                  fontSize: 18,
+                  // fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty || !RegExp(r'^\d{10}$').hasMatch(value)) {
+                    return 'Enter Block and room number!';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  room = value;
+                },
+                // obscureText: true,
+                decoration: textInputDecoration.copyWith(
+                  labelText: "Block-Room number",
                   // onChanged: ,
                 ),
               ),
@@ -108,6 +186,15 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'This field cant be empty!';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  placeToVisit = value;
+                },
                 // obscureText: true,
                 decoration: textInputDecoration.copyWith(
                   labelText: "Address",
@@ -127,6 +214,15 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'This field cant be empty!';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  personToVisit = value;
+                },
                 // obscureText: true,
                 decoration: textInputDecoration.copyWith(
                   labelText: "Name",
@@ -146,6 +242,17 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               TextFormField(
+                onChanged: (value) {
+                  guardian_contact = value;
+                },
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r'^(\+91[\s-]?)?(\d{10})$').hasMatch(value)) {
+                    return 'Enter Correct Contact';
+                  } else {
+                    return null;
+                  }
+                },
                 // obscureText: true,
                 decoration: textInputDecoration.copyWith(
                   labelText: "Mobile",
@@ -165,6 +272,15 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'This field cant be empty!';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  reason = value;
+                },
                 // obscureText: true,
                 decoration: textInputDecoration.copyWith(
                   labelText: "Valid reason",
@@ -184,6 +300,16 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty || !RegExp(r'^\d{10}$').hasMatch(value)) {
+                    return 'Enter duration in day count!';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  duration = value;
+                },
                 // obscureText: true,
                 decoration: textInputDecoration.copyWith(
                   labelText: "Duration in days",
@@ -200,7 +326,7 @@ class _LeaveAppState extends State<LeaveApp> {
               ),
               const SizedBox(height: 10),
               GestureDetector(
-                onTap: () => _selectDate(context, departureSelectedDate),
+                onTap: () => _departselectDate(context),
                 child: AbsorbPointer(
                   child: TextFormField(
                     readOnly: true,
@@ -227,7 +353,7 @@ class _LeaveAppState extends State<LeaveApp> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: () => _selectDate(context, arrivalSelectedDate),
+                onTap: () => _arrivalselectDate(context),
                 child: AbsorbPointer(
                   child: TextFormField(
                     readOnly: true,
@@ -264,15 +390,21 @@ class _LeaveAppState extends State<LeaveApp> {
                             ),
                             IconButton(
                               onPressed: () async {
+                                DatabaseService.addLeaveData(
+                                  name,
+                                  mobilenum,
+                                  placeToVisit,
+                                  personToVisit,
+                                  guardian_contact,
+                                  reason,
+                                  duration,
+                                  from,
+                                  to,
+                                  room,
+                                );
                                 showSnackBar(context, Colors.green,
-                                    "Successfully submitted leave....");
+                                    "Successfully submitted leave application....");
                                 nextScreenReplace(context, StudentPage());
-                                // await authService.signOut();
-                                // Navigator.of(context).pushAndRemoveUntil(
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             const LoginPage()),
-                                //     (route) => false);
                               },
                               icon: Icon(Icons.done),
                               color: Colors.green,

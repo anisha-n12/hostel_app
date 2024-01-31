@@ -179,7 +179,7 @@ class _StudentPageState extends State<StudentPage> {
                             color: Colors.black,
                           ),
                           borderRadius: BorderRadius.circular(10)),
-                      child: Column(
+                      child: const Column(
                         children: [
                           ListTile(
                             textColor: Colors.white,
@@ -191,7 +191,9 @@ class _StudentPageState extends State<StudentPage> {
                                 fontWeight: FontWeight.bold, fontSize: 12),
                             enabled: false,
                             tileColor: Colors.green,
-                          )
+                          ),
+                          SizedBox(height: 300),
+                          
                         ],
                       ),
                     ),

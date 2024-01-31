@@ -182,4 +182,40 @@ class DatabaseService {
       // Handle the error as needed
     }
   }
+
+  static Future<void> addLeaveData(
+    String name,
+    String mobilenum,
+    String placeToVisit,
+    String personToVisit,
+    String guardian_contact,
+    String reason,
+    String duration,
+    String from,
+    String to,
+    String room,
+  ) async {
+    final CollectionReference leaveDataCollection =
+        FirebaseFirestore.instance.collection("leave_data");
+
+    try {
+      await leaveDataCollection.add({
+        "name": name,
+        "mobilenum": mobilenum,
+        "placeToVisit": placeToVisit,
+        "personToVisit": personToVisit,
+        "guardian_contact": guardian_contact,
+        "reason": reason,
+        "duration": duration,
+        "from": from,
+        "to": to,
+        "room": room,
+      });
+      print("Leave data added successfully");
+    } catch (e) {
+      print("Error adding leave data: $e");
+      // Handle the error as needed
+    }
+  }
+
 }
