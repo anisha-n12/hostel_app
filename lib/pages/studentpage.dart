@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
+import 'package:hostel_app/pages/room_change.dart';
 import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -98,7 +99,9 @@ class _StudentPageState extends State<StudentPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  nextScreen(context, Room_change());
+                },
                 selectedColor: Constants.primaryColor,
                 selected: false,
                 contentPadding:

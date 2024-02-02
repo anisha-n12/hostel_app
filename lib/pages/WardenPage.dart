@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintWarden.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
+import 'package:hostel_app/pages/getdata.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
 import 'package:hostel_app/shared/constants.dart';
@@ -142,7 +143,7 @@ class _WardenPageState extends State<WardenPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreenReplace(context, LeaveApp());
+                  nextScreenReplace(context, GetUserData());
                 },
                 selectedColor: Constants.primaryColor,
                 selected: false,
