@@ -116,38 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextFormField(
-                              validator: (value) {
-                                if (value!.isEmpty ||
-                                    !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                                  return 'Enter Correct Name';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              onChanged: (value) {},
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.person),
-                                labelText: "Name",
-                                labelStyle: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                hintText: "Name",
-                                filled: true,
-                                fillColor: Color.fromARGB(255, 255, 253, 208),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
                             const SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             TextFormField(
                               onChanged: (value) {
@@ -175,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             TextFormField(
                               onChanged: (value) {
@@ -204,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 3,
+                              height: 5,
                             ),
                             GestureDetector(
                               onTap: () async {
@@ -244,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 18,
+                              height: 30,
                             ),
                             Center(
                               child: ElevatedButton(
@@ -298,39 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () async {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  await Future.delayed(
-                                    const Duration(seconds: 2),
-                                    () {
-                                      setState(() {
-                                        isLoading = false;
-                                      });
-
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const StudentPage(),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  "Register for new user",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color.fromARGB(255, 173, 103, 10),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            const SizedBox(height: 50)
                           ],
                         ),
                       ),

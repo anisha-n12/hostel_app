@@ -381,9 +381,9 @@ class DatabaseService {
       showSnackBar(context, Colors.green, "Logged in successfully...");
     } on FirebaseAuthException catch (e) {
       print("Error signing in: $e");
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        showSnackBar(context, Colors.red, "Incorrect email or password...");
-      }
+      // if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      showSnackBar(context, Colors.red, "Incorrect email or password...");
+      // }
     }
   }
 
