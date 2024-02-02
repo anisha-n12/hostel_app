@@ -20,8 +20,10 @@ class _StudentPageState extends State<StudentPage> {
   String mobilenum = "";
   String parent_contact = "";
   String reason = "";
+  String id = "";
   DateTime inTimeStamp = DateTime.now();
   DateTime outTimeStamp = DateTime.now();
+  DateTime attendance = DateTime.now();
   bool indone = false;
   bool outdone = false;
 
@@ -191,9 +193,9 @@ class _StudentPageState extends State<StudentPage> {
                             color: Colors.black,
                           ),
                           borderRadius: BorderRadius.circular(10)),
-                      child: const Column(
+                      child: Column(
                         children: [
-                          ListTile(
+                          const ListTile(
                             textColor: Colors.white,
                             title: Text("12/09/2023"),
                             titleTextStyle: TextStyle(
@@ -204,7 +206,38 @@ class _StudentPageState extends State<StudentPage> {
                             enabled: false,
                             tileColor: Colors.green,
                           ),
-                          SizedBox(height: 300),
+                          SizedBox(height: 30),
+                          TextFormField(
+                              readOnly: true,
+                              controller: TextEditingController(
+                                text: outdone
+                                    ? "${outTimeStamp.toLocal()}".substring(
+                                        0,
+                                        "${outTimeStamp.toLocal()}".indexOf(
+                                            ':',
+                                            "${outTimeStamp.toLocal()}"
+                                                    .indexOf(':') +
+                                                1))
+                                    : "",
+                              ),
+                              decoration: textInputDecoration.copyWith(
+                                  labelText: "Click button to mark OUT")),
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (!outdone) {
+                                setState(() {
+                                  outTimeStamp = DateTime.now();
+                                });
+                                outdone = true;
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: Text("Mark me OUT"),
+                          ),
                         ],
                       ),
                     ),
@@ -432,7 +465,13 @@ class _StudentPageState extends State<StudentPage> {
                                 readOnly: true,
                                 controller: TextEditingController(
                                   text: indone
-                                      ? "${inTimeStamp.toLocal()}".split(' ')[0]
+                                      ? "${inTimeStamp.toLocal()}".substring(
+                                          0,
+                                          "${inTimeStamp.toLocal()}".indexOf(
+                                              ':',
+                                              "${inTimeStamp.toLocal()}"
+                                                      .indexOf(':') +
+                                                  1))
                                       : "",
                                 ),
                                 decoration: textInputDecoration.copyWith(
@@ -441,8 +480,13 @@ class _StudentPageState extends State<StudentPage> {
                           SizedBox(width: 10),
                           ElevatedButton(
                             onPressed: () {
-                              inTimeStamp = DateTime.now();
-                              indone = true;
+                              if (!indone) {
+                                setState(() {
+                                  inTimeStamp = DateTime.now();
+                                });
+
+                                indone = true;
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
@@ -460,8 +504,13 @@ class _StudentPageState extends State<StudentPage> {
                                 readOnly: true,
                                 controller: TextEditingController(
                                   text: outdone
-                                      ? "${outTimeStamp.toLocal()}"
-                                          .split(' ')[0]
+                                      ? "${outTimeStamp.toLocal()}".substring(
+                                          0,
+                                          "${outTimeStamp.toLocal()}".indexOf(
+                                              ':',
+                                              "${outTimeStamp.toLocal()}"
+                                                      .indexOf(':') +
+                                                  1))
                                       : "",
                                 ),
                                 decoration: textInputDecoration.copyWith(
@@ -470,8 +519,12 @@ class _StudentPageState extends State<StudentPage> {
                           SizedBox(width: 10),
                           ElevatedButton(
                             onPressed: () {
-                              outTimeStamp = DateTime.now();
-                              outdone = true;
+                              if (!outdone) {
+                                setState(() {
+                                  outTimeStamp = DateTime.now();
+                                });
+                                outdone = true;
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
