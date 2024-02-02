@@ -272,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       AdminPage()));
-                                        } else if (dropDownValue == 'Admin') {
+                                        } else if (dropDownValue == 'Rector') {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(

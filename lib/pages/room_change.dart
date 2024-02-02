@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/studentpage.dart';
+import 'package:hostel_app/service/database_service.dart';
+import 'package:hostel_app/widgets/widgets.dart';
 
 class Room_change extends StatefulWidget {
   const Room_change({Key? key}) : super(key: key);
@@ -8,6 +11,13 @@ class Room_change extends StatefulWidget {
 }
 
 class _Room_changeState extends State<Room_change> {
+  String name = '';
+  String room = '';
+  String reason = '';
+  String desiredHostel = '';
+  String course = '';
+  bool isAccepeted = false;
+  bool done = false;
   String dropDownValue = "Select your Hostel/block";
   String selectedCourse = "Select course";
   final _formKey = GlobalKey<FormState>();
@@ -78,10 +88,13 @@ class _Room_changeState extends State<Room_change> {
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                            return 'Enter Correct Name';
+                            return 'Please Enter Correct Name';
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          name = value;
                         },
                         decoration: const InputDecoration(
                           hintText: "Enter your Name",
@@ -90,51 +103,6 @@ class _Room_changeState extends State<Room_change> {
                           border: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.brown, width: 1.0)),
-                          hintStyle:
-                              TextStyle(fontSize: 15.0, color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Registration ID",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                            return 'Enter Correct ID';
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Enter Registration ID",
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 255, 254, 244),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.brown,
-                              width: 1.0,
-                            ),
-                          ),
                           hintStyle:
                               TextStyle(fontSize: 15.0, color: Colors.grey),
                         ),
@@ -202,7 +170,7 @@ class _Room_changeState extends State<Room_change> {
                                         value: selectedCourse,
                                         onChanged: (newValue) {
                                           setState(() {
-                                            selectedCourse = newValue!;
+                                            course = newValue!;
                                           });
                                         },
                                         items: [
@@ -270,6 +238,11 @@ class _Room_changeState extends State<Room_change> {
                     Container(
                       height: 45,
                       child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            room = value;
+                          });
+                        },
                         decoration: const InputDecoration(
                           hintText: "Enter Room No",
                           filled: true,
@@ -285,54 +258,6 @@ class _Room_changeState extends State<Room_change> {
                             color: Colors.grey,
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Container(
-                      height: 45,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 254, 244),
-                        border: Border.all(color: Colors.brown),
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                      child: DropdownButton<String>(
-                        value: dropDownValue,
-                        icon: const Icon(Icons.arrow_drop_down),
-                        style: const TextStyle(color: Colors.black),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropDownValue = newValue!;
-                          });
-                        },
-                        items: const [
-                          DropdownMenuItem<String>(
-                            value: "Select your Hostel/block",
-                            child: Text("Select your Hostel/block"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "A",
-                            child: Text("A"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "B",
-                            child: Text("B"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "C",
-                            child: Text("C"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "D",
-                            child: Text("D"),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: "E",
-                            child: Text("E"),
-                          ),
-                        ],
                       ),
                     ),
                     const SizedBox(
@@ -357,6 +282,11 @@ class _Room_changeState extends State<Room_change> {
                     Container(
                       height: 45,
                       child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            reason = value;
+                          });
+                        },
                         decoration: const InputDecoration(
                           hintText: "Specify your Reason",
                           filled: true,
@@ -394,6 +324,11 @@ class _Room_changeState extends State<Room_change> {
                     Container(
                       height: 45,
                       child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            desiredHostel = value;
+                          });
+                        },
                         decoration: const InputDecoration(
                           hintText: "Enter Desired Hostel",
                           filled: true,
@@ -411,7 +346,14 @@ class _Room_changeState extends State<Room_change> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Validation successful, navigate to home page
+                        DatabaseService.addRoomChangeData(name, room, reason,
+                            desiredHostel, course, isAccepeted, done);
+                        showSnackBar(context, Colors.green,
+                            "Room Change Application Submmitted");
+                        nextScreen(context, StudentPage());
+                      },
                       child: const Text(
                         "Submit",
                         style: TextStyle(color: Colors.white),
