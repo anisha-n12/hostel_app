@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/adminpage.dart';
 import 'package:hostel_app/service/database_service.dart';
@@ -36,6 +37,16 @@ class _WardenRegistrationState extends State<WardenRegistration> {
   String username = "";
   String password = "";
   String confirmPassword = "";
+
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an email';
+    }
+    if (!EmailValidator.validate(value)) {
+      return 'Please enter valid email ';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -445,24 +456,18 @@ class _WardenRegistrationState extends State<WardenRegistration> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your Username';
-                      }
-                      // You can add additional validation for username format if needed
-                      return null;
-                    },
+                    validator: validateEmail,
                     onChanged: (value) {
                       username = value;
                     },
                     decoration: const InputDecoration(
-                      labelText: "Username",
+                      labelText: "User Email",
                       labelStyle: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
                         fontWeight: FontWeight.w400,
                       ),
-                      hintText: "Enter Username",
+                      hintText: "Enter Email for sign up",
                       filled: true,
                       fillColor: Color.fromARGB(255, 255, 253, 208),
                       border: OutlineInputBorder(

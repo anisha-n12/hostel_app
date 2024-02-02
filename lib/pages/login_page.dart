@@ -8,6 +8,7 @@ import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/rector.dart';
 import 'package:hostel_app/pages/reg_page.dart';
 import 'package:hostel_app/pages/studentpage.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,6 +20,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String dropDownValue = "Select your category";
+  String email = "";
+  String password = "";
   final _formKey = GlobalKey<FormState>();
 
   String? validateEmail(String? value) {
@@ -122,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                                   return null;
                                 }
                               },
+                              onChanged: (value) {},
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.person),
                                 labelText: "Name",
@@ -146,6 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                               height: 15,
                             ),
                             TextFormField(
+                              onChanged: (value) {
+                                email = value;
+                              },
                               validator: validateEmail,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.email),
@@ -171,6 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                               height: 15,
                             ),
                             TextFormField(
+                              onChanged: (value) {
+                                password = value;
+                              },
                               obscureText: true,
                               validator: validatepassword,
                               decoration: const InputDecoration(
@@ -273,17 +283,11 @@ class _LoginPageState extends State<LoginPage> {
                                                   builder: (context) =>
                                                       AdminPage()));
                                         } else if (dropDownValue == 'Rector') {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      RectorPage()));
+                                          DatabaseService.signInUser(
+                                              context, email, password);
                                         } else if (dropDownValue == 'Warden') {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WardenPage()));
+                                          DatabaseService.signInUser(
+                                              context, email, password);
                                         }
                                       },
                                     );

@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/getdata.dart';
 import 'package:hostel_app/pages/getinoutdata.dart';
 import 'package:hostel_app/pages/guestRecord.dart';
+import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/in_out_details.dart';
 import 'package:hostel_app/pages/rectorProfile.dart';
 import 'package:hostel_app/pages/room_change_list.dart';
 import 'package:hostel_app/pages/roomchange_application_list.dart';
+import 'package:hostel_app/pages/studentallotment.dart';
+import 'package:hostel_app/widgets/widgets.dart';
 // import 'package:hostel_app/pages/complaintpage.dart';
 // import 'package:hostel_app/pages/homepage.dart';
 // import 'package:hostel_app/shared/constants.dart';
@@ -90,7 +94,9 @@ class _StudentPageState extends State<RectorPage> {
                     style: TextStyle(color: Colors.white)),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  nextScreen(context, const GuestRecord());
+                },
                 selectedColor: primaryColor,
                 selected: false,
                 contentPadding:
@@ -104,7 +110,7 @@ class _StudentPageState extends State<RectorPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreen(context, const GuestRecord());
+                  nextScreen(context, AllotStudentList());
                 },
                 selectedColor: primaryColor,
                 selected: false,
@@ -199,13 +205,10 @@ class _StudentPageState extends State<RectorPage> {
                             ),
                             IconButton(
                               onPressed: () async {
-                                // nextScreenReplace(context, HomePage());
-                                // await authService.signOut();
-                                // Navigator.of(context).pushAndRemoveUntil(
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             const LoginPage()),
-                                //     (route) => false);
+                                await FirebaseAuth.instance.signOut();
+                                showSnackBar(context, Colors.green,
+                                    "Logged out successfully!");
+                                nextScreenReplace(context, HomePage());
                               },
                               icon: Icon(Icons.done),
                               color: Colors.green,

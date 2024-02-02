@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
+import 'package:hostel_app/pages/homeinfo.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
 import 'package:hostel_app/pages/room_change.dart';
@@ -27,6 +28,7 @@ class _StudentPageState extends State<StudentPage> {
   DateTime attendance = DateTime.now();
   bool indone = false;
   bool outdone = false;
+  bool attendancedone=false;
 
   @override
   Widget build(BuildContext context) {
@@ -184,9 +186,20 @@ class _StudentPageState extends State<StudentPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 200,
+                const SizedBox(height: 30),
+                NoticeBoard(),
+                const SizedBox(height: 30),
+                const Center(
+                  child: Text(
+                    "MARK ATTENDANCE",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
+                const SizedBox(height: 30),
                 Builder(builder: (context) {
                   return Padding(
                     padding: const EdgeInsets.all(30.0),
@@ -213,26 +226,27 @@ class _StudentPageState extends State<StudentPage> {
                           TextFormField(
                               readOnly: true,
                               controller: TextEditingController(
-                                text: outdone
-                                    ? "${outTimeStamp.toLocal()}".substring(
+                                text: attendancedone
+                                    ? "${attendance.toLocal()}".substring(
                                         0,
-                                        "${outTimeStamp.toLocal()}".indexOf(
+                                        "${attendance.toLocal()}".indexOf(
                                             ':',
-                                            "${outTimeStamp.toLocal()}"
+                                            "${attendance.toLocal()}"
                                                     .indexOf(':') +
                                                 1))
                                     : "",
                               ),
                               decoration: textInputDecoration.copyWith(
-                                  labelText: "Click button to mark OUT")),
+                                  labelText: "Click button to mark attendance")),
                           SizedBox(width: 10),
                           ElevatedButton(
                             onPressed: () {
-                              if (!outdone) {
+                              if (!attendancedone) {
                                 setState(() {
-                                  outTimeStamp = DateTime.now();
+                                  attendance = DateTime.now();
                                 });
-                                outdone = true;
+                                
+                                attendancedone = true;
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -246,13 +260,13 @@ class _StudentPageState extends State<StudentPage> {
                     ),
                   );
                 }),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       const Center(
                         child: Text(
                           "MARK IN/OUT",
