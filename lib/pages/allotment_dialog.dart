@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:hostel_app/service/database_service.dart';
+import 'package:hostel_app/widgets/widgets.dart';
+
 Future<void> showAllotmentDialog(
     BuildContext context, String studentName, String email) async {
-  String block = '';
-  String roomNumber = '';
+  String block = 'Select Block';
+  String roomNumber = 'Select Room';
 
-  String username = '';
+  String username = email;
   String password = '';
 
   return showDialog<void>(
@@ -38,7 +41,8 @@ Future<void> showAllotmentDialog(
                 // Display generated credentials
                 if (email.isNotEmpty && password.isNotEmpty)
                   Text(
-                      'Generated Credentials:\nUsername: $email\nPassword: $password'),
+                    'Generated Credentials:\nUsername: $username\nPassword: $password',
+                  ),
               ],
             ),
             actions: <Widget>[
@@ -48,21 +52,29 @@ Future<void> showAllotmentDialog(
                 },
                 child: Text('Cancel'),
               ),
-              TextButton(
-                  onPressed: () {
-                    // Generate credentials
-                    // username = generateCredentials(studentName);
-                    password = generateRandomPassword();
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _agreedTo
+                      ? Color.fromARGB(255, 190, 124, 37)
+                      : Colors.grey,
+                ),
+                onPressed: () {
+                  // Generate credentials
+                  // username = generateCredentials(studentName);
+                  // password = generateRandomPassword();
 
-                    // Update the dialog to display credentials
-                    setState(() {});
+                  // Update the dialog to display credentials
+                  setState(() {});
 
-                    // You can send credentials to warden here if needed
-                    // sendCredentialsToWarden(username, password);
-                  },
-                  child: Text(password.isEmpty
-                      ? 'Generate Credentials'
-                      : 'Credentials Sent to Warden')),
+                  // You can send credentials to warden here if needed
+                  // sendCredentialsToWarden(username, password);
+                },
+                child: Text(
+                  _agreedTo
+                      ? 'Credentials Sent to Warden'
+                      : 'Generate Credentials',
+                ),
+              ),
             ],
           );
         },
