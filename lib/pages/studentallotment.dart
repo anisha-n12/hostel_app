@@ -93,7 +93,7 @@ class AllotStudentList extends StatelessWidget {
                         onPressed: () {
                           // Handle the Allot button click
                           // Add your logic here
-                          showAllotmentDialog(context, name);
+                          showAllotmentDialog(context, name, email);
                         },
                         child: Text("Allot"),
                       ),
@@ -222,7 +222,7 @@ class StudentSearchDelegate extends SearchDelegate<String> {
                     // Handle the Allot button click
                     // Add your logic here
 
-                    showAllotmentDialog(context, name);
+                    showAllotmentDialog(context, name, email);
                   },
                   child: Text("Allot"),
                 ),

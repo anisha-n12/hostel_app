@@ -1,4 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:hostel_app/pages/WardenPage.dart';
+import 'package:hostel_app/pages/rector.dart';
+import 'package:hostel_app/widgets/widgets.dart';
 
 // class DatabaseService {
 //   final String? uid;
@@ -297,6 +302,8 @@ class DatabaseService {
   ) async {
     final CollectionReference wardenDataCollection =
         FirebaseFirestore.instance.collection("warden_data");
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
     try {
       await wardenDataCollection.add({
@@ -317,9 +324,80 @@ class DatabaseService {
         "password": password,
       });
       print("Warden data added successfully");
+      // Example code to create a user and store additional information in Firestore
+      try {
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: username,
+          password: password,
+        );
+
+        // Store user role in Firestore
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'email': userCredential.user!.email,
+          'role': RecOrWar, // or 'home' based on your categories
+        });
+      } catch (e) {
+        print("Error creating user: $e");
+      }
     } catch (e) {
       print("Error adding Warden data: $e");
       // Handle the error as needed
+    }
+  }
+
+  static Future<void> createUserLogin(String username, String password) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
+
+      // Store user role in Firestore
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'email': userCredential.user!.email,
+        'role': "Student", // or 'home' based on your categories
+      });
+    } catch (e) {
+      print("Error creating user: $e");
+    }
+  }
+
+  static Future<void> signInUser(
+      BuildContext context, String email, String password) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      _redirectUser(context, userCredential.user!);
+      showSnackBar(context, Colors.green, "Logged in successfully...");
+    } on FirebaseAuthException catch (e) {
+      print("Error signing in: $e");
+      // if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      showSnackBar(context, Colors.red, "Incorrect email or password...");
+      // }
+    }
+  }
+
+  static void _redirectUser(BuildContext context, User user) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    DocumentSnapshot userDoc =
+        await _firestore.collection('users').doc(user.uid).get();
+    String role = userDoc['role'];
+
+    if (role == 'Rector') {
+      nextScreenReplace(context, RectorPage());
+    } else if (role == 'Warden') {
+      nextScreenReplace(context, WardenPage());
     }
   }
 }
