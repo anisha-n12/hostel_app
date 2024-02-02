@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
 import 'package:hostel_app/pages/rector.dart';
+import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
 // class DatabaseService {
@@ -346,6 +347,27 @@ class DatabaseService {
     }
   }
 
+  static Future creatUserStudent(String username, String password) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
+
+      // Store user role in Firestore
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'email': userCredential.user!.email,
+        'role': "Student", // or 'home' based on your categories
+      });
+    } catch (e) {
+      print("Error creating user: $e");
+    }
+  }
+
   static Future<void> createUserLogin(String username, String password) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -398,6 +420,8 @@ class DatabaseService {
       nextScreenReplace(context, RectorPage());
     } else if (role == 'Warden') {
       nextScreenReplace(context, WardenPage());
+    } else if (role == 'Student') {
+      nextScreenReplace(context, StudentPage());
     }
   }
 }
