@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 Future<void> showAllotmentDialog(
-    BuildContext context, String studentName) async {
+    BuildContext context, String studentName, String email) async {
   String block = '';
   String roomNumber = '';
 
@@ -36,9 +36,9 @@ Future<void> showAllotmentDialog(
                 ),
                 SizedBox(height: 20),
                 // Display generated credentials
-                if (username.isNotEmpty && password.isNotEmpty)
+                if (email.isNotEmpty && password.isNotEmpty)
                   Text(
-                      'Generated Credentials:\nUsername: $username\nPassword: $password'),
+                      'Generated Credentials:\nUsername: $email\nPassword: $password'),
               ],
             ),
             actions: <Widget>[
@@ -51,7 +51,7 @@ Future<void> showAllotmentDialog(
               TextButton(
                   onPressed: () {
                     // Generate credentials
-                    username = generateCredentials(studentName);
+                    // username = generateCredentials(studentName);
                     password = generateRandomPassword();
 
                     // Update the dialog to display credentials
@@ -60,7 +60,7 @@ Future<void> showAllotmentDialog(
                     // You can send credentials to warden here if needed
                     // sendCredentialsToWarden(username, password);
                   },
-                  child: Text(username.isEmpty
+                  child: Text(password.isEmpty
                       ? 'Generate Credentials'
                       : 'Credentials Sent to Warden')),
             ],
