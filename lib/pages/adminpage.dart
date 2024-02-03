@@ -126,12 +126,6 @@ class _AdminPageState extends State<AdminPage> {
                             IconButton(
                               onPressed: () async {
                                 nextScreenReplace(context, HomePage());
-                                // await authService.signOut();
-                                // Navigator.of(context).pushAndRemoveUntil(
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             const LoginPage()),
-                                //     (route) => false);
                               },
                               icon: Icon(Icons.done),
                               color: Colors.green,
