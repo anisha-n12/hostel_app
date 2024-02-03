@@ -214,32 +214,71 @@ class PhotoGallery extends StatefulWidget {
 class _PhotoGalleryState extends State<PhotoGallery> {
   List<Container> carouselItems = [
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Girls Hostel")
-      ],
-    )),
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Girls Hostel")
+          ],
+        )),
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Hostel Gate")
-      ],
-    )),
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Hostel Gate")
+          ],
+        )),
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Boys Hostel")
-      ],
-    ))
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Boys Hostel")
+          ],
+        ))
   ];
   @override
   Widget build(BuildContext context) {
@@ -276,32 +315,71 @@ class Facilities extends StatefulWidget {
 class _FacilitiesState extends State<Facilities> {
   List<Container> carouselItems = [
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Doctor")
-      ],
-    )),
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Doctor")
+          ],
+        )),
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Water Coolers")
-      ],
-    )),
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Water Coolers")
+          ],
+        )),
     Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 100),
-        const Text("Security")
-      ],
-    ))
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Security")
+          ],
+        ))
   ];
   @override
   Widget build(BuildContext context) {
@@ -338,79 +416,133 @@ class MessInfo extends StatefulWidget {
 class _MessInfoState extends State<MessInfo> {
   List<Container> carouselItems = [
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Girl's Hostel Mess",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Breakfast-Lunch-Dinner",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Girl's Hostel Mess",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Breakfast-Lunch-Dinner",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Boy's Hostel Mess1",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Breakfast-Lunch-Dinner",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Boy's Hostel Mess1",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Breakfast-Lunch-Dinner",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Boy's Hostel Mess2",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Breakfast-Lunch-Dinner",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    ))
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Boy's Hostel Mess2",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Breakfast-Lunch-Dinner",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        ))
   ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-          // Other widgets
-          CarouselSlider(
-            items: carouselItems,
-            options: CarouselOptions(
-              height: size.height * 0.5, // Customize the height of the carousel
-              autoPlay: false, // Enable auto-play
-              enlargeCenterPage: true, // Increase the size of the center item
-              enableInfiniteScroll: true, // Enable infinite scroll
-              onPageChanged: (index, reason) {
-                // Optional callback when the page changes
-                // You can use it to update any additional UI components
-              },
-            ),
-          ),
-        ]));
+              // Other widgets
+              CarouselSlider(
+                items: carouselItems,
+                options: CarouselOptions(
+                  height:
+                      size.height * 0.5, // Customize the height of the carousel
+                  autoPlay: false, // Enable auto-play
+                  enlargeCenterPage:
+                      true, // Increase the size of the center item
+                  enableInfiniteScroll: true, // Enable infinite scroll
+                  onPageChanged: (index, reason) {
+                    // Optional callback when the page changes
+                    // You can use it to update any additional UI components
+                  },
+                ),
+              ),
+            ]));
   }
 }
 
@@ -424,107 +556,185 @@ class BlocksInfo extends StatefulWidget {
 class _BlocksInfoState extends State<BlocksInfo> {
   List<Container> carouselItems = [
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Block A",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Girl's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block A",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Block B",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Girl's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block B",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Block C",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Boy's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block C",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Block D",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Boy's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block D",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "Block E",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "Girl's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    )),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block E",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
     Container(
-        child: Column(
-      children: [
-        Image.network(
-            'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-        const SizedBox(height: 50),
-        const Text(
-          "PG Hostel",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
         ),
-        const Text(
-          "PG Boy's Hostel",
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          textAlign: TextAlign.left,
-        )
-      ],
-    ))
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "PG Hostel",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "PG Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        ))
   ];
   @override
   Widget build(BuildContext context) {
