@@ -11,6 +11,7 @@ Future<void> showAllotmentDialog(
 
   String username = email;
   String password = '';
+  bool _agreedTo = false;
 
   return showDialog<void>(
     context: context,
@@ -64,7 +65,10 @@ Future<void> showAllotmentDialog(
                   // password = generateRandomPassword();
 
                   // Update the dialog to display credentials
-                  setState(() {});
+                  DatabaseService.createUserLogin(username, password);
+                  setState(() {
+                    _agreedTo = true;
+                  });
 
                   // You can send credentials to warden here if needed
                   // sendCredentialsToWarden(username, password);

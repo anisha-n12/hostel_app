@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
 import 'package:hostel_app/pages/rector.dart';
+import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
 // class DatabaseService {
@@ -399,5 +400,11 @@ class DatabaseService {
     } else if (role == 'Warden') {
       nextScreenReplace(context, WardenPage());
     }
+    else if (role == 'Student') {
+      nextScreenReplace(context, StudentPage());
+    }
   }
+  // static Future createStudent(String username, String password)async{
+
+  // }
 }
