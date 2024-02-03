@@ -7,6 +7,7 @@ import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 import 'package:marquee/marquee.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     HomeInfo(),
     FormsPage(),
-    MapsPage(),
-    ContactPage()
+    ContactPage(),
+    AboutPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -94,12 +95,12 @@ class _HomePageState extends State<HomePage> {
             label: 'Forms',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.location_on_outlined),
-            label: 'Maps',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.call_outlined),
             label: 'Contact',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grade_rounded),
+            label: 'About',
           ),
         ],
       ),
@@ -161,18 +162,127 @@ class _FormsPageState extends State<FormsPage> {
   }
 }
 
-class MapsPage extends StatefulWidget {
-  const MapsPage({super.key});
+class AboutPage extends StatefulWidget {
+  const AboutPage({super.key});
 
   @override
-  State<MapsPage> createState() => _MapsPageState();
+  State<AboutPage> createState() => _AboutPageState();
 }
 
-class _MapsPageState extends State<MapsPage> {
+class _AboutPageState extends State<AboutPage> {
+  // late GoogleMapController mapController;
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("MapsPage"),
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+              child: Text(
+            'VJTI Hostel',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          )),
+          SizedBox(height: 16),
+          Center(
+              child: Text(
+            'Girl\'s Hostel',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          )),
+          SizedBox(height: 16),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'Rules and Regulations',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    '- Usage of Reading room and other amenities should be made with care and students should not damage any of the stuff.',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Center(
+              child: Text(
+            'Boy\'s Hostel',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          )),
+          SizedBox(height: 16),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'Rules and Regulations',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    '- Usage of Reading room and other amenities should be made with care and students should not damage any of the stuff.',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -193,10 +303,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, Register_Page());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("Head Rector",
@@ -211,10 +317,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("Girls Hostel Rector",
@@ -229,10 +331,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("Boys Hostel Rector",
@@ -247,10 +345,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("A Block Hostel Incharge",
@@ -265,10 +359,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("B Block Hostel Incharge",
@@ -283,10 +373,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("C Block Hostel Incharge",
@@ -301,10 +387,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("D Block Hostel Incharge",
@@ -319,10 +401,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("E Block Hostel Incharge",
@@ -337,10 +415,6 @@ class _ContactPageState extends State<ContactPage> {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              nextScreen(context, GuestForm());
-            },
             child: const ListTile(
               leading: Icon(Icons.contact_page_outlined),
               title: Text("PG Boys Hostel Incharge",
