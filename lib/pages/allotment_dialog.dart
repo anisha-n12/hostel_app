@@ -77,8 +77,8 @@ import 'dart:math';
 import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
-Future<void> showAllotmentDialog(
-BuildContext context, String studentName, String email) async {
+Future<void> showAllotmentDialog(BuildContext context, String studentName,
+    String email, String studentid) async {
   String block = 'Select Block';
   String roomNumber = 'Select Room';
 
@@ -97,7 +97,6 @@ BuildContext context, String studentName, String email) async {
   availableRoomNumbers.insert(0, 'Select Room');
   // Replace with your room number options
 
-  bool _agreedTo = false; // Add this variable for the ElevatedButton state
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -166,15 +165,20 @@ BuildContext context, String studentName, String email) async {
                 onPressed: () {
                   // Generate credentials
                   // username = generateCredentials(studentName);
-                  // password = generateRandomPassword();
+                  password = generateRandomPassword();
 
                   // Update the dialog to display credentials
 
-                  DatabaseService.createUserLogin(username, password);
+                  DatabaseService.createUserLogin(
+                      username, password, studentid);
+                  DatabaseService.assignStudentToRoom(
+                      block, roomNumber, studentid);
+                  Navigator.of(context).pop();
+                  showSnackBar(context, Colors.green,
+                      "Student Allotted!\nCredentials are sent to Warden...");
                   setState(() {
                     _agreedTo = true;
                   });
-
 
                   // You can send credentials to warden here if needed
                   // sendCredentialsToWarden(username, password);
@@ -191,6 +195,32 @@ BuildContext context, String studentName, String email) async {
       );
     },
   );
+}
+
+String generateRandomPassword({int length = 12}) {
+  const String lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+  const String uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const String digitChars = '0123456789';
+  const String specialChars = '!@#\$%^&*()-=_+[]{}|;:,.<>?/';
+
+  String allChars = lowercaseChars + uppercaseChars + digitChars + specialChars;
+
+  Random random = Random();
+  List<String> passwordList = List.generate(length, (index) {
+    return allChars[random.nextInt(allChars.length)];
+  });
+
+  // Ensure that the generated password contains at least one character from each category
+  passwordList[Random().nextInt(length)] =
+      lowercaseChars[random.nextInt(lowercaseChars.length)];
+  passwordList[Random().nextInt(length)] =
+      uppercaseChars[random.nextInt(uppercaseChars.length)];
+  passwordList[Random().nextInt(length)] =
+      digitChars[random.nextInt(digitChars.length)];
+  passwordList[Random().nextInt(length)] =
+      specialChars[random.nextInt(specialChars.length)];
+
+  return passwordList.join();
 }
 
 Future<List<String>> getAvailableRoomNumbersFromCollection(

@@ -38,15 +38,14 @@ class AllotStudentList extends StatelessWidget {
           List<Widget> studentDataWidgets =
               snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
+            String studentId = document.id;
             // Access all the fields in each document
             String regId = data['regId'].toString();
             String name = data['name'].toString();
             String email = data['email'].toString();
             String mobile = data['mobile'].toString();
             String branch = data['branch'].toString();
-            Timestamp admissionDate1 = data['admissionDate'] as Timestamp;
-            DateTime admissionDate = admissionDate1.toDate();
+            String admissionDate = data['admissionDate'].toString();
 
             String year = data['year'].toString();
             String category = data['category'].toString();
@@ -93,7 +92,7 @@ class AllotStudentList extends StatelessWidget {
                         onPressed: () {
                           // Handle the Allot button click
                           // Add your logic here
-                          showAllotmentDialog(context, name, email);
+                          showAllotmentDialog(context, name, email, studentId);
                         },
                         child: Text("Allot"),
                       ),
@@ -169,7 +168,7 @@ class StudentSearchDelegate extends SearchDelegate<String> {
         List<Widget> searchResults =
             snapshot.data!.docs.map((DocumentSnapshot document) {
           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
+          String studentId = document.id;
           // Access all the fields in each document
           String regId = data['regId'].toString();
           String name = data['name'].toString();
@@ -222,7 +221,7 @@ class StudentSearchDelegate extends SearchDelegate<String> {
                     // Handle the Allot button click
                     // Add your logic here
 
-                    showAllotmentDialog(context, name, email);
+                    showAllotmentDialog(context, name, email, studentId);
                   },
                   child: Text("Allot"),
                 ),

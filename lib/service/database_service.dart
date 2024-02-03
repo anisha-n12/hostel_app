@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/WardenPage.dart';
+import 'package:hostel_app/pages/adminpage.dart';
 import 'package:hostel_app/pages/rector.dart';
 import 'package:hostel_app/pages/studentpage.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -347,7 +348,29 @@ class DatabaseService {
     }
   }
 
-  static Future creatUserStudent(String username, String password) async {
+  // static Future creatUserStudent(String username, String password) async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  //   try {
+  //     UserCredential userCredential =
+  //         await _auth.createUserWithEmailAndPassword(
+  //       email: username,
+  //       password: password,
+  //     );
+
+  //     // Store user role in Firestore
+  //     await _firestore.collection('users').doc(userCredential.user!.uid).set({
+  //       'email': userCredential.user!.email,
+  //       'role': "Student", // or 'home' based on your categories
+  //     });
+  //   } catch (e) {
+  //     print("Error creating user: $e");
+  //   }
+  // }
+
+  static Future createUserLogin(
+      String username, String password, String studentid) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -360,29 +383,16 @@ class DatabaseService {
 
       // Store user role in Firestore
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'email': userCredential.user!.email,
+        'email': username,
         'role': "Student", // or 'home' based on your categories
       });
-    } catch (e) {
-      print("Error creating user: $e");
-    }
-  }
+      DocumentReference studentRef =
+          FirebaseFirestore.instance.collection('students').doc(studentid);
 
-  static Future<void> createUserLogin(String username, String password) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: username,
-        password: password,
-      );
-
-      // Store user role in Firestore
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'email': userCredential.user!.email,
-        'role': "Student", // or 'home' based on your categories
+      // Update the login and password fields
+      await studentRef.update({
+        'login': username,
+        'password': password,
       });
     } catch (e) {
       print("Error creating user: $e");
@@ -422,11 +432,48 @@ class DatabaseService {
       nextScreenReplace(context, WardenPage());
     } else if (role == 'Student') {
       nextScreenReplace(context, StudentPage());
-    }
-    else if (role == 'Student') {
-      nextScreenReplace(context, StudentPage());
+    } else if (role == 'Admin') {
+      nextScreenReplace(context, AdminPage());
     }
   }
+
+  static Future<void> assignStudentToRoom(
+      String blockNo, String roomNo, String studentId) async {
+    try {
+      // Reference to the specific room document
+      DocumentReference roomRef =
+          FirebaseFirestore.instance.collection(blockNo).doc(roomNo);
+
+      // Get the current room data
+      DocumentSnapshot roomSnapshot = await roomRef.get();
+
+      // Check if the room document exists
+      if (roomSnapshot.exists) {
+        Map<String, dynamic> roomData =
+            roomSnapshot.data() as Map<String, dynamic>;
+
+        // Check and update the first available student field
+        if (roomData['student1'] == '') {
+          await roomRef.update({'student1': studentId});
+        } else if (roomData['student2'] == '') {
+          await roomRef.update({'student2': studentId});
+        } else if (roomData['student3'] == '') {
+          await roomRef.update({'student3': studentId});
+        } else {
+          print('Room is already full. Cannot assign more students.');
+          return;
+        }
+
+        print(
+            'Student $studentId assigned to Block $blockNo, Room $roomNo successfully.');
+      } else {
+        print('Room $roomNo in Block $blockNo not found.');
+      }
+    } catch (e) {
+      print('Error assigning student to room: $e');
+    }
+  }
+
   // static Future createStudent(String username, String password)async{
 
   // }

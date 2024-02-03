@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homepage.dart';
@@ -125,6 +126,7 @@ class _AdminPageState extends State<AdminPage> {
                             ),
                             IconButton(
                               onPressed: () async {
+                                await FirebaseAuth.instance.signOut();
                                 nextScreenReplace(context, HomePage());
                               },
                               icon: Icon(Icons.done),
