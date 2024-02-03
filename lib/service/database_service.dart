@@ -423,5 +423,11 @@ class DatabaseService {
     } else if (role == 'Student') {
       nextScreenReplace(context, StudentPage());
     }
+    else if (role == 'Student') {
+      nextScreenReplace(context, StudentPage());
+    }
   }
+  // static Future createStudent(String username, String password)async{
+
+  // }
 }

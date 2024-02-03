@@ -74,13 +74,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:hostel_app/service/database_service.dart';
+import 'package:hostel_app/widgets/widgets.dart';
+
 Future<void> showAllotmentDialog(
-    BuildContext context, String studentName) async {
+BuildContext context, String studentName, String email) async {
   String block = 'Select Block';
   String roomNumber = 'Select Room';
 
-  String username = '';
+  String username = email;
   String password = '';
+  bool _agreedTo = false;
 
   List<String> blockOptions = [
     'Select Block',
@@ -165,7 +169,12 @@ Future<void> showAllotmentDialog(
                   // password = generateRandomPassword();
 
                   // Update the dialog to display credentials
-                  setState(() {});
+
+                  DatabaseService.createUserLogin(username, password);
+                  setState(() {
+                    _agreedTo = true;
+                  });
+
 
                   // You can send credentials to warden here if needed
                   // sendCredentialsToWarden(username, password);
