@@ -245,7 +245,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -267,7 +267,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -324,7 +324,7 @@ class _FacilitiesState extends State<Facilities> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -346,7 +346,7 @@ class _FacilitiesState extends State<Facilities> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -368,7 +368,7 @@ class _FacilitiesState extends State<Facilities> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -425,7 +425,7 @@ class _MessInfoState extends State<MessInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -455,7 +455,7 @@ class _MessInfoState extends State<MessInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -485,7 +485,7 @@ class _MessInfoState extends State<MessInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -519,7 +519,7 @@ class _MessInfoState extends State<MessInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -565,7 +565,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -595,7 +595,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -625,7 +625,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -655,7 +655,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -685,7 +685,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
@@ -715,7 +715,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
               Colors.transparent,
               Colors.transparent,
               Colors.transparent,
-              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
             ],
           ),
         ),
