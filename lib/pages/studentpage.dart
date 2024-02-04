@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
+import 'package:hostel_app/pages/profile_pg.dart';
 import 'package:hostel_app/pages/room_change.dart';
 import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/shared/constants.dart';
@@ -16,14 +18,13 @@ class StudentPage extends StatefulWidget {
 }
 
 class _StudentPageState extends State<StudentPage> {
-  
   String name = "";
   String room = "";
-  String placeToVisit = "";
+  String block = "";
   String mobilenum = "";
-  String parent_contact = "";
+  String placeToVisit = "";
   String reason = "";
-  String id = "";
+  String parent_contact = "";
   DateTime inTimeStamp = DateTime.now();
   DateTime outTimeStamp = DateTime.now();
   DateTime attendance = DateTime.now();
@@ -33,6 +34,7 @@ class _StudentPageState extends State<StudentPage> {
 
   @override
   Widget build(BuildContext context) {
+    getuserdata();
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -74,7 +76,9 @@ class _StudentPageState extends State<StudentPage> {
                 height: 2,
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  nextScreen(context, Profile_pg());
+                },
                 selectedColor: Constants.primaryColor,
                 selected: true,
                 contentPadding:
@@ -247,6 +251,7 @@ class _StudentPageState extends State<StudentPage> {
                                 setState(() {
                                   attendance = DateTime.now();
                                 });
+                                print("$name");
 
                                 attendancedone = true;
                               }
@@ -335,13 +340,12 @@ class _StudentPageState extends State<StudentPage> {
                           labelText: "Reason",
                         ),
                       ),
-                  
-              
                       const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () async {
                           DatabaseService.addInOutData(name, mobilenum, room,
                               placeToVisit, reason, parent_contact);
+
                           showSnackBar(context, Colors.green,
                               "Successfully added entry!\nPlease mark yourself In/Out...");
                           // nextScreenReplace(context, StudentPage());
@@ -357,6 +361,44 @@ class _StudentPageState extends State<StudentPage> {
                         ),
                       ),
                       const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                                readOnly: true,
+                                controller: TextEditingController(
+                                  text: outdone
+                                      ? "${outTimeStamp.toLocal()}".substring(
+                                          0,
+                                          "${outTimeStamp.toLocal()}".indexOf(
+                                              ':',
+                                              "${outTimeStamp.toLocal()}"
+                                                      .indexOf(':') +
+                                                  1))
+                                      : "",
+                                ),
+                                decoration: textInputDecoration.copyWith(
+                                    labelText: "Click button to mark OUT")),
+                          ),
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (!outdone) {
+                                setState(() {
+                                  outTimeStamp = DateTime.now();
+                                });
+                                outdone = true;
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: Text("Mark me OUT"),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                       Row(
                         children: [
                           Expanded(
@@ -396,48 +438,20 @@ class _StudentPageState extends State<StudentPage> {
                         ],
                       ),
                       SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                                readOnly: true,
-                                controller: TextEditingController(
-                                  text: outdone
-                                      ? "${outTimeStamp.toLocal()}".substring(
-                                          0,
-                                          "${outTimeStamp.toLocal()}".indexOf(
-                                              ':',
-                                              "${outTimeStamp.toLocal()}"
-                                                      .indexOf(':') +
-                                                  1))
-                                      : "",
-                                ),
-                                decoration: textInputDecoration.copyWith(
-                                    labelText: "Click button to mark OUT")),
-                          ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (!outdone) {
-                                setState(() {
-                                  outTimeStamp = DateTime.now();
-                                });
-                                outdone = true;
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              foregroundColor: Colors.white,
-                            ),
-                            child: Text("Mark me OUT"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 50)
                     ],
                   ),
                 ),
               ]),
         ));
+  }
+
+  Future<void> getuserdata() async {
+    Map<String, dynamic>? studentData =
+        await DatabaseService.getCurrentUserData();
+    name = studentData!['name'];
+    room = studentData['room'];
+    block = studentData['block'];
+    mobilenum = studentData['mobile'];
+    parent_contact = studentData['parentMobile'];
   }
 }

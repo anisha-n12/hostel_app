@@ -127,6 +127,8 @@ import 'package:hostel_app/widgets/widgets.dart';
 // }
 
 class DatabaseService {
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   static Future<void> addStudentData(
     String name,
@@ -183,6 +185,8 @@ class DatabaseService {
         "allotted": "No",
         "loginID": "",
         "password": "",
+        "block": "",
+        "room": ""
       });
       print("Student data added successfully");
     } catch (e) {
@@ -304,8 +308,6 @@ class DatabaseService {
   ) async {
     final CollectionReference wardenDataCollection =
         FirebaseFirestore.instance.collection("warden_data");
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
     try {
       await wardenDataCollection.add({
@@ -348,32 +350,8 @@ class DatabaseService {
     }
   }
 
-  // static Future creatUserStudent(String username, String password) async {
-  //   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  //   try {
-  //     UserCredential userCredential =
-  //         await _auth.createUserWithEmailAndPassword(
-  //       email: username,
-  //       password: password,
-  //     );
-
-  //     // Store user role in Firestore
-  //     await _firestore.collection('users').doc(userCredential.user!.uid).set({
-  //       'email': userCredential.user!.email,
-  //       'role': "Student", // or 'home' based on your categories
-  //     });
-  //   } catch (e) {
-  //     print("Error creating user: $e");
-  //   }
-  // }
-
   static Future createUserLogin(
       String username, String password, String studentid) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -400,16 +378,14 @@ class DatabaseService {
   }
 
   static Future<void> signInUser(
-      BuildContext context, String email, String password) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      BuildContext context, String email, String password, String role) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      _redirectUser(context, userCredential.user!);
+      _redirectUser(context, userCredential.user!, role);
       showSnackBar(context, Colors.green, "Logged in successfully...");
     } on FirebaseAuthException catch (e) {
       print("Error signing in: $e");
@@ -419,21 +395,22 @@ class DatabaseService {
     }
   }
 
-  static void _redirectUser(BuildContext context, User user) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static void _redirectUser(
+      BuildContext context, User user, String role) async {
     DocumentSnapshot userDoc =
         await _firestore.collection('users').doc(user.uid).get();
-    String role = userDoc['role'];
+    String roleinData = userDoc['role'];
 
-    if (role == 'Rector') {
+    if (roleinData == 'Rector' && role == "Rector") {
       nextScreenReplace(context, RectorPage());
-    } else if (role == 'Warden') {
+    } else if (roleinData == 'Warden' && role == "Warden") {
       nextScreenReplace(context, WardenPage());
-    } else if (role == 'Student') {
+    } else if (roleinData == 'Student' && role == "Student") {
       nextScreenReplace(context, StudentPage());
-    } else if (role == 'Admin') {
+    } else if (roleinData == 'Admin' && role == "Admin") {
       nextScreenReplace(context, AdminPage());
+    } else {
+      showSnackBar(context, Colors.red, "No user found with given role!");
     }
   }
 
@@ -472,9 +449,47 @@ class DatabaseService {
     } catch (e) {
       print('Error assigning student to room: $e');
     }
+    try {
+      // Reference to the student document in Firestore
+      DocumentReference studentRef =
+          FirebaseFirestore.instance.collection('students').doc(studentId);
+
+      // Update the fields
+      await studentRef.update({
+        'alloted': "Yes",
+        'block': blockNo,
+        'room': roomNo,
+      });
+
+      print('Student details updated successfully!');
+    } catch (e) {
+      print('Error updating student details: $e');
+    }
   }
 
-  // static Future createStudent(String username, String password)async{
+  static Future<Map<String, dynamic>?> getCurrentUserData() async {
+    try {
+      User? user = _auth.currentUser;
 
-  // }
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+          .collection('students')
+          .where('email', isEqualTo: user!.email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Retrieve the first document (assuming email is unique)
+        DocumentSnapshot<Map<String, dynamic>> userData =
+            querySnapshot.docs.first;
+
+        // User data found in Firestore
+        return userData.data();
+      } else {
+        // No user is signed in
+        return null;
+      }
+    } catch (e) {
+      print('Error getting current user data: $e');
+      return null;
+    }
+  }
 }

@@ -191,7 +191,8 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const forgot_pswd(),
+                                        builder: (context) =>
+                                            const forgot_pswd(),
                                       ),
                                     );
                                   },
@@ -227,42 +228,15 @@ class _LoginPageState extends State<LoginPage> {
                                       const Color.fromARGB(255, 216, 142, 45),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-
+                                  // if (_formKey.currentState!.validate()) {
+                                  //   setState(() {
+                                  //     isLoading = true;
+                                  //   });
+                                    DatabaseService.signInUser(context, email,
+                                        password, dropDownValue);
                                     // Simulate a delay (you would typically call an async operation here)
-                                    Future.delayed(
-                                      const Duration(seconds: 2),
-                                      () {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-
-                                        if (dropDownValue == 'Student') {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      StudentPage()));
-                                        } else if (dropDownValue == 'Admin') {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AdminPage()));
-                                        } else if (dropDownValue == 'Rector') {
-                                          DatabaseService.signInUser(
-                                              context, email, password);
-                                        } else if (dropDownValue == 'Warden') {
-                                          DatabaseService.signInUser(
-                                              context, email, password);
-                                        }
-                                      },
-                                    );
                                   }
-                                },
+                                
                               ),
                             ),
                             const SizedBox(
