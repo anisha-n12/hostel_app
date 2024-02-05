@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/homeinfo.dart';
 import 'package:hostel_app/pages/homepage.dart';
@@ -22,6 +28,7 @@ class _StudentPageState extends State<StudentPage> {
   String room = "";
   String block = "";
   String mobilenum = "";
+  String email = "";
   String placeToVisit = "";
   String reason = "";
   String parent_contact = "";
@@ -31,6 +38,82 @@ class _StudentPageState extends State<StudentPage> {
   bool indone = false;
   bool outdone = false;
   bool attendancedone = false;
+  var date = DateTime.now();
+  bool marked = false;
+  late DateTime presentDate;
+  late DateTime allowedStartTime;
+  late DateTime allowedEndTime;
+  late DateTime timeMarked;
+  @override
+  void initState() {
+    super.initState();
+    presentDate = DateTime.now();
+    _updateTimeRange();
+  }
+
+  void _updateTimeRange() {
+    allowedStartTime =
+        DateTime(presentDate.year, presentDate.month, presentDate.day, 21, 0);
+    allowedEndTime =
+        DateTime(presentDate.year, presentDate.month, presentDate.day, 22, 0);
+  }
+
+  bool checkboundary(double latitude, double longitude) {
+    //co ordinates for vjtti
+    double vjtiLatitude = 19.021996;
+    double vjtiLongitude = 72.856845;
+
+    double threshold = 0.001;
+    bool withinboundary = (latitude >= vjtiLatitude - threshold &&
+            latitude <= vjtiLatitude + threshold) &&
+        (longitude >= vjtiLongitude - threshold &&
+            longitude <= vjtiLongitude + threshold);
+
+    if (!withinboundary) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error !!!"),
+              content: Text(
+                  'You must be within the boundary of V.J.T.I. College to mark attendance.'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Ok',
+                      style: TextStyle(color: Colors.brown),
+                    ))
+              ],
+            );
+          });
+    }
+    return withinboundary;
+  }
+
+  void storeAttendanceInFirebase() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      String attendanceId =
+          FirebaseFirestore.instance.collection('students').doc().id;
+
+      await FirebaseFirestore.instance
+          .collection('students')
+          .doc(user?.uid)
+          .collection('attendanceTime')
+          .doc(attendanceId)
+          .set({
+        'timestamp': Timestamp.fromDate(timeMarked),
+      });
+
+      print('Attendance stored in Firestore.');
+    } catch (error) {
+      print('Error storing attendance in Firestore: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +145,7 @@ class _StudentPageState extends State<StudentPage> {
                 height: 15,
               ),
               Text(
-                "Username",
+                "$name",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
@@ -77,7 +160,14 @@ class _StudentPageState extends State<StudentPage> {
               ),
               ListTile(
                 onTap: () {
-                  nextScreen(context, Profile_pg());
+                  nextScreen(
+                      context,
+                      Profile_pg(
+                          name: name,
+                          block: block,
+                          room: room,
+                          mobile: mobilenum,
+                          email: email));
                 },
                 selectedColor: Constants.primaryColor,
                 selected: true,
@@ -191,82 +281,139 @@ class _StudentPageState extends State<StudentPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
                 NoticeBoard(),
-                const SizedBox(height: 30),
-                const Center(
-                  child: Text(
-                    "MARK ATTENDANCE",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                SizedBox(height: 30),
+                Center(
+                  child: Container(
+                    height: 230,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.brown, width: 2),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Column(children: [
+                        const Text(
+                          'Mark Regular Attendance',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.brown),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 2),
+                        const Text(
+                          "Timmings : 9:00pm - 10:00pm\nTurn on location while marking present",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.deepOrangeAccent),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Text(
+                                "Today: ${date.day}-${date.month}-${date.year}",
+                                style: const TextStyle(
+                                  color: Colors.brown,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                          child: Row(children: [
+                            Switch(
+                              value: marked,
+                              onChanged: (bool value) async {
+                                while (true) {
+                                  var status = await Permission.location.status;
+                                  if (status != PermissionStatus.granted) {
+                                    await showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                'Requires Location to mark attendance'),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: TextStyle(
+                                                        color: Colors.brown),
+                                                  )),
+                                            ],
+                                          );
+                                        });
+                                    await Permission.location.request();
+                                  } else {
+                                    break;
+                                  }
+                                  Position position =
+                                      await Geolocator.getCurrentPosition(
+                                          desiredAccuracy:
+                                              LocationAccuracy.high);
+                                  bool iswithinBoundary = checkboundary(
+                                      position.latitude, position.longitude);
+                                  DateTime currentTime = DateTime.now();
+                                  if (currentTime.isAfter(allowedStartTime) &&
+                                      currentTime.isBefore(allowedEndTime) &&
+                                      !marked &&
+                                      iswithinBoundary) {
+                                    setState(() {
+                                      marked = value;
+                                      if (marked) {
+                                        timeMarked = DateTime.now();
+                                        storeAttendanceInFirebase();
+                                      }
+                                    });
+                                  }
+                                }
+                              },
+                              activeColor:
+                                  const Color.fromARGB(255, 132, 209, 172),
+                              inactiveTrackColor:
+                                  const Color.fromARGB(255, 248, 198, 122),
+                            ),
+                            SizedBox(width: 2),
+                            Text(
+                              "Mark my Today's Attendance",
+                              style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400),
+                            )
+                          ]),
+                        ),
+                        if (marked)
+                          SizedBox(
+                            height: 2,
+                          ),
+                        if (marked)
+                          Text(
+                              "Marked at : ${DateFormat('HH:mm:ss').format(timeMarked)}",
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 163, 145, 96),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ))
+                      ]),
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
-                Builder(builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        children: [
-                          const ListTile(
-                            textColor: Colors.white,
-                            title: Text("12/09/2023"),
-                            titleTextStyle: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                            subtitle: Text("Wednesday, 9:48 pm"),
-                            subtitleTextStyle: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12),
-                            enabled: false,
-                            tileColor: Colors.green,
-                          ),
-                          SizedBox(height: 30),
-                          TextFormField(
-                              readOnly: true,
-                              controller: TextEditingController(
-                                text: attendancedone
-                                    ? "${attendance.toLocal()}".substring(
-                                        0,
-                                        "${attendance.toLocal()}".indexOf(
-                                            ':',
-                                            "${attendance.toLocal()}"
-                                                    .indexOf(':') +
-                                                1))
-                                    : "",
-                              ),
-                              decoration: textInputDecoration.copyWith(
-                                  labelText:
-                                      "Click button to mark attendance")),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (!attendancedone) {
-                                setState(() {
-                                  attendance = DateTime.now();
-                                });
-                                print("$name");
-
-                                attendancedone = true;
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              foregroundColor: Colors.white,
-                            ),
-                            child: Text("Mark me OUT"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -453,5 +600,6 @@ class _StudentPageState extends State<StudentPage> {
     block = studentData['block'];
     mobilenum = studentData['mobile'];
     parent_contact = studentData['parentMobile'];
+    email = studentData['email'];
   }
 }
