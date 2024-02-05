@@ -186,7 +186,8 @@ class DatabaseService {
         "loginID": "",
         "password": "",
         "block": "",
-        "room": ""
+        "room": "",
+        "allotmentdate": ""
       });
       print("Student data added successfully");
     } catch (e) {
@@ -456,14 +457,32 @@ class DatabaseService {
 
       // Update the fields
       await studentRef.update({
-        'alloted': "Yes",
+        'allotted': "Yes",
         'block': blockNo,
         'room': roomNo,
+        'allotmentdate': '${DateTime.now().toLocal()}'.split(' ')[0],
       });
 
       print('Student details updated successfully!');
     } catch (e) {
       print('Error updating student details: $e');
+    }
+  }
+
+  static Future<void> resetPasswordForCurrentUser(String newPassword) async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser != null) {
+        // Update the password for the current user
+        await currentUser.updatePassword(newPassword);
+
+        print('Password reset successfully.');
+      } else {
+        print('No user is signed in.');
+      }
+    } catch (e) {
+      print('Error resetting password: $e');
     }
   }
 
