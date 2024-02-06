@@ -129,6 +129,9 @@ import 'package:hostel_app/widgets/widgets.dart';
 class DatabaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static String currusername = "";
+  static String currpassword = "";
+  static String currdocid = "";
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   static Future<void> addStudentData(
     String name,
@@ -385,7 +388,8 @@ class DatabaseService {
         email: email,
         password: password,
       );
-
+      currusername = email;
+      currpassword = password;
       _redirectUser(context, userCredential.user!, role);
       showSnackBar(context, Colors.green, "Logged in successfully...");
     } on FirebaseAuthException catch (e) {
@@ -400,18 +404,76 @@ class DatabaseService {
       BuildContext context, User user, String role) async {
     DocumentSnapshot userDoc =
         await _firestore.collection('users').doc(user.uid).get();
+
     String roleinData = userDoc['role'];
 
     if (roleinData == 'Rector' && role == "Rector") {
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('warden_data')
+          .where('email', isEqualTo: userDoc['email'])
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        currdocid = querySnapshot.docs.first.id;
+      }
       nextScreenReplace(context, RectorPage());
     } else if (roleinData == 'Warden' && role == "Warden") {
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('warden_data')
+          .where('email', isEqualTo: userDoc['email'])
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        currdocid = querySnapshot.docs.first.id;
+      }
       nextScreenReplace(context, WardenPage());
     } else if (roleinData == 'Student' && role == "Student") {
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('students')
+          .where('email', isEqualTo: userDoc['email'])
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        currdocid = querySnapshot.docs.first.id;
+      }
       nextScreenReplace(context, StudentPage());
     } else if (roleinData == 'Admin' && role == "Admin") {
+      currdocid = "admin";
       nextScreenReplace(context, AdminPage());
     } else {
       showSnackBar(context, Colors.red, "No user found with given role!");
+    }
+  }
+
+  static Future<void> updateMobileAndParentMobile(
+      BuildContext context, mobile, String parentMobile) async {
+    try {
+      // Get the current user's email
+      String currentUserEmail = FirebaseAuth.instance.currentUser?.email ?? '';
+
+      // Query the 'students' collection based on the current user's email
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection('students')
+              .where('email', isEqualTo: currentUserEmail)
+              .get();
+
+      // Check if there's a document with the current user's email
+      if (querySnapshot.docs.isNotEmpty) {
+        // Update the mobile and parentMobile fields for the first document found (assuming email is unique)
+        DocumentReference studentRef = querySnapshot.docs.first.reference;
+
+        await studentRef.update({
+          'mobile': mobile,
+          'parentMobile': parentMobile,
+        });
+        showSnackBar(context, Colors.green, "Data Updated successfully!");
+        print(
+            'Mobile and parentMobile updated successfully for the current user.');
+      } else {
+        print(
+            'No document found with the current user\'s email in the students collection.');
+      }
+    } catch (e) {
+      print('Error updating mobile and parentMobile: $e');
+      showSnackBar(context, Colors.red, "Updating data failed!");
     }
   }
 
@@ -469,14 +531,15 @@ class DatabaseService {
     }
   }
 
-  static Future<void> resetPasswordForCurrentUser(String newPassword) async {
+  static Future<void> resetPasswordForCurrentUser(
+      BuildContext context, String newPassword, String role) async {
     try {
       User? currentUser = FirebaseAuth.instance.currentUser;
 
       if (currentUser != null) {
         // Update the password for the current user
         await currentUser.updatePassword(newPassword);
-
+        if (role == "Student") {}
         print('Password reset successfully.');
       } else {
         print('No user is signed in.');
@@ -484,6 +547,29 @@ class DatabaseService {
     } catch (e) {
       print('Error resetting password: $e');
     }
+    try {
+      CollectionReference studentsCollection = FirebaseFirestore.instance.collection('students');
+
+  // Update the document with the given docId
+  await studentsCollection.doc(currdocid).update({
+    'password': newPassword,
+  });
+        
+    } catch (e) {
+      print('Error updating password: $e');
+      showSnackBar(context, Colors.red, "Updating data failed!");
+    }
+  }
+
+  static bool checkPassword(String password) {
+    return password == currpassword;
+  }
+
+  static Future<void> signOutAndReset() async {
+    await _auth.signOut(); // Sign out from Firebase Authentication
+    currusername = ""; // Reset username
+    currpassword = "";
+    currdocid = "";
   }
 
   static Future<Map<String, dynamic>?> getCurrentUserData() async {
