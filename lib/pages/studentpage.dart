@@ -118,6 +118,7 @@ class _StudentPageState extends State<StudentPage> {
   @override
   Widget build(BuildContext context) {
     getuserdata();
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -163,11 +164,13 @@ class _StudentPageState extends State<StudentPage> {
                   nextScreen(
                       context,
                       Profile_pg(
-                          name: name,
-                          block: block,
-                          room: room,
-                          mobile: mobilenum,
-                          email: email));
+                        name: name,
+                        block: block,
+                        room: room,
+                        mobile: mobilenum,
+                        email: email,
+                        parentContact: parent_contact,
+                      ));
                 },
                 selectedColor: Constants.primaryColor,
                 selected: true,
@@ -247,13 +250,10 @@ class _StudentPageState extends State<StudentPage> {
                             ),
                             IconButton(
                               onPressed: () async {
+                                DatabaseService.signOutAndReset();
+                                showSnackBar(context, Colors.green,
+                                    "Logged out successfully!");
                                 nextScreenReplace(context, HomePage());
-                                // await authService.signOut();
-                                // Navigator.of(context).pushAndRemoveUntil(
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             const LoginPage()),
-                                //     (route) => false);
                               },
                               icon: Icon(Icons.done),
                               color: Colors.green,
@@ -595,11 +595,13 @@ class _StudentPageState extends State<StudentPage> {
   Future<void> getuserdata() async {
     Map<String, dynamic>? studentData =
         await DatabaseService.getCurrentUserData();
-    name = studentData!['name'];
-    room = studentData['room'];
-    block = studentData['block'];
-    mobilenum = studentData['mobile'];
-    parent_contact = studentData['parentMobile'];
-    email = studentData['email'];
+    setState(() {
+      name = studentData!['name'];
+      room = studentData['room'];
+      block = studentData['block'];
+      mobilenum = studentData['mobile'];
+      parent_contact = studentData['parentMobile'];
+      email = studentData['email'];
+    });
   }
 }

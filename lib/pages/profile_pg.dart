@@ -9,6 +9,8 @@ class Profile_pg extends StatefulWidget {
   final String room;
   final String mobile;
   final String email;
+  final String parentContact;
+
   const Profile_pg({
     Key? key,
     required this.name,
@@ -16,6 +18,9 @@ class Profile_pg extends StatefulWidget {
     required this.room,
     required this.mobile,
     required this.email,
+    required this.parentContact,
+    // required this.currentpass,
+    // required this.newpass
   }) : super(key: key);
 
   @override
@@ -23,7 +28,12 @@ class Profile_pg extends StatefulWidget {
 }
 
 class _Profile_pgState extends State<Profile_pg> {
+  String currentpass = "";
+  String newpass = "";
+  String newcontact = "";
+  String newparentContact = "";
   bool isEditing = false;
+  bool isVerified = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +97,18 @@ class _Profile_pgState extends State<Profile_pg> {
                       Text('Room: ${widget.room}'),
                       SizedBox(height: 20),
                       TextFormField(
+                        onChanged: (value) {
+                          newcontact = value;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^(\+91[\s-]?)?(\d{10})$')
+                                  .hasMatch(value)) {
+                            return 'Enter Correct Contact';
+                          } else {
+                            return null;
+                          }
+                        },
                         enabled: isEditing,
                         initialValue: widget.mobile,
                         decoration: InputDecoration(
@@ -113,15 +135,27 @@ class _Profile_pgState extends State<Profile_pg> {
                       SizedBox(height: 10),
                       TextFormField(
                         enabled: isEditing,
-                        initialValue: widget.email,
+                        onChanged: (value) {
+                          newparentContact = value;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^(\+91[\s-]?)?(\d{10})$')
+                                  .hasMatch(value)) {
+                            return 'Enter Correct Contact';
+                          } else {
+                            return null;
+                          }
+                        },
+                        initialValue: widget.parentContact,
                         decoration: InputDecoration(
-                          labelText: 'Email',
+                          labelText: 'Parent\'s contact number',
                           labelStyle: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
                           ),
-                          hintText: 'Enter your email address',
+                          hintText: 'Enter your Parent\'s contact number',
                           filled: true,
                           fillColor: Color.fromARGB(255, 255, 253, 208),
                           border: OutlineInputBorder(
@@ -138,11 +172,143 @@ class _Profile_pgState extends State<Profile_pg> {
                       SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
+                          DatabaseService.updateMobileAndParentMobile(
+                              context, newcontact, newparentContact);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: isEditing
+                                ? Color.fromARGB(255, 190, 124, 37)
+                                : Colors.grey),
+                        child: Text("Update"),
+                      ),
+                      SizedBox(height: 30),
+                      Text(
+                        'Reset Password',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      TextFormField(
+                        enabled: isEditing,
+                        onChanged: (value) {
+                          currentpass = value;
+                        },
+                        // controller: currentPasswordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Current Password',
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          hintText: 'Enter your current password',
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 255, 253, 208),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 1.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 10.0,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
                           setState(() {
-                            isEditing = !isEditing;
+                            isVerified =
+                                DatabaseService.checkPassword(currentpass);
                           });
                         },
-                        child: Text(isEditing ? 'Save' : 'Edit'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: isEditing
+                                ? Color.fromARGB(255, 190, 124, 37)
+                                : Colors.grey),
+                        child: Text("Verify"),
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        enabled: isVerified,
+                        // controller: newPasswordController,
+                        onChanged: (value) {
+                          newpass = value;
+                        },
+
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'New Password',
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          hintText: 'Enter your new password',
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 255, 253, 208),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 1.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 10.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        enabled: isVerified,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please confirm your Password';
+                          } else if (value != newpass) {
+                            return 'Passwords do not match';
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          labelStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          hintText: 'Confirm your new password',
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 255, 253, 208),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 1.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 10.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        
+                        onPressed: () {
+                          if (isVerified) {
+                            DatabaseService.resetPasswordForCurrentUser(
+                                context, newpass, "Student");
+                          } else {
+                            showSnackBar(context, Colors.red,
+                                "Verify current password first!");
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isVerified
+                              ? Color.fromARGB(255, 190, 124, 37)
+                              : Colors.grey,
+                        ),
+                        child: Text("Reset Password"),
                       ),
                     ],
                   ),

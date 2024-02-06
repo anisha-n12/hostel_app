@@ -9,6 +9,7 @@ import 'package:hostel_app/pages/rectorProfile.dart';
 import 'package:hostel_app/pages/room_change_list.dart';
 import 'package:hostel_app/pages/roomchange_application_list.dart';
 import 'package:hostel_app/pages/studentallotment.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 // import 'package:hostel_app/pages/complaintpage.dart';
 // import 'package:hostel_app/pages/homepage.dart';
@@ -205,7 +206,7 @@ class _StudentPageState extends State<RectorPage> {
                             ),
                             IconButton(
                               onPressed: () async {
-                                await FirebaseAuth.instance.signOut();
+                                DatabaseService.signOutAndReset();
                                 showSnackBar(context, Colors.green,
                                     "Logged out successfully!");
                                 nextScreenReplace(context, HomePage());

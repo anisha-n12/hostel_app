@@ -5,6 +5,7 @@ import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/rectorRegistration.dart';
 import 'package:hostel_app/pages/studentallotment.dart';
 import 'package:hostel_app/pages/wardenRegistration.dart';
+import 'package:hostel_app/service/database_service.dart';
 // import 'package:hostel_app/pages/leaveapplication.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
@@ -126,7 +127,9 @@ class _AdminPageState extends State<AdminPage> {
                             ),
                             IconButton(
                               onPressed: () async {
-                                await FirebaseAuth.instance.signOut();
+                                DatabaseService.signOutAndReset();
+                                showSnackBar(context, Colors.green,
+                                    "Logged out successfully!");
                                 nextScreenReplace(context, HomePage());
                               },
                               icon: Icon(Icons.done),
@@ -185,6 +188,4 @@ class _AdminPageState extends State<AdminPage> {
               ]),
         ));
   }
-
-  
 }

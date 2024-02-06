@@ -8,6 +8,7 @@ import 'package:hostel_app/pages/complaintpage.dart';
 import 'package:hostel_app/pages/getdata.dart';
 import 'package:hostel_app/pages/homepage.dart';
 import 'package:hostel_app/pages/leaveapplication.dart';
+import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/shared/constants.dart';
 import 'package:hostel_app/widgets/widgets.dart';
 
@@ -179,11 +180,10 @@ class _WardenPageState extends State<WardenPage> {
                             ),
                             IconButton(
                               onPressed: () async {
-                                await FirebaseAuth.instance.signOut();
+                                DatabaseService.signOutAndReset();
                                 showSnackBar(context, Colors.green,
                                     "Logged out successfully!");
                                 nextScreenReplace(context, HomePage());
-                                
                               },
                               icon: Icon(Icons.done),
                               color: Colors.green,
