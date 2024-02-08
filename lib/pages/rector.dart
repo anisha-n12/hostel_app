@@ -11,10 +11,6 @@ import 'package:hostel_app/pages/roomchange_application_list.dart';
 import 'package:hostel_app/pages/studentallotment.dart';
 import 'package:hostel_app/service/database_service.dart';
 import 'package:hostel_app/widgets/widgets.dart';
-// import 'package:hostel_app/pages/complaintpage.dart';
-// import 'package:hostel_app/pages/homepage.dart';
-// import 'package:hostel_app/shared/constants.dart';
-// import 'package:hostel_app/widgets/widgets.dart';
 
 class RectorPage extends StatefulWidget {
   const RectorPage({super.key});
