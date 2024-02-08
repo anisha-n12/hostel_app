@@ -6,20 +6,15 @@ import 'package:hostel_app/widgets/widgets.dart';
 
 class RectorProfile extends StatefulWidget {
   final String name;
-  final String block;
-  final String room;
-  final String mobile;
-  final String email;
-  final String parentContact;
+  final String block = "";
+  final String room = "";
+  final String mobile = "";
+  final String email = "";
+  final String parentContact = "";
 
   const RectorProfile({
     Key? key,
     required this.name,
-    required this.block,
-    required this.room,
-    required this.mobile,
-    required this.email,
-    required this.parentContact,
   }) : super(key: key);
 
   @override

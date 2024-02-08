@@ -76,7 +76,7 @@ class _StudentPageState extends State<RectorPage> {
                   nextScreen(
                       context,
                       RectorProfile(
-                        username: 'Rector1',
+                        name: 'Rector1',
                       ));
                 },
                 selectedColor: primaryColor,
