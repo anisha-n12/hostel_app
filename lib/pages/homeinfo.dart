@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeInfo extends StatefulWidget {
   const HomeInfo({super.key});
@@ -22,14 +23,12 @@ class _HomeInfoState extends State<HomeInfo> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(
-            height: 200,
-          ),
+          NoticeBoard(),
           Container(
               child: Column(
+            children: [
+              Row(
                 children: [
-                  Row(
-                              children: [
                   ButtonBar(
                     buttonPadding: const EdgeInsets.all(10),
                     alignment: MainAxisAlignment.center,
@@ -44,9 +43,13 @@ class _HomeInfoState extends State<HomeInfo> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 _currentIndex == 0 ? Colors.black : Colors.grey,
-                            foregroundColor:
-                                _currentIndex == 0 ? Colors.white : Colors.black),
-                        child: const Text("Photos", style: TextStyle(fontSize: 13),),
+                            foregroundColor: _currentIndex == 0
+                                ? Colors.white
+                                : Colors.black),
+                        child: const Text(
+                          "Photos",
+                          style: TextStyle(fontSize: 13),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -57,9 +60,13 @@ class _HomeInfoState extends State<HomeInfo> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 _currentIndex == 1 ? Colors.black : Colors.grey,
-                            foregroundColor:
-                                _currentIndex == 1 ? Colors.white : Colors.black),
-                        child: const Text("Facilities", style: TextStyle(fontSize: 13),),
+                            foregroundColor: _currentIndex == 1
+                                ? Colors.white
+                                : Colors.black),
+                        child: const Text(
+                          "Facilities",
+                          style: TextStyle(fontSize: 13),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -70,9 +77,13 @@ class _HomeInfoState extends State<HomeInfo> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 _currentIndex == 2 ? Colors.black : Colors.grey,
-                            foregroundColor:
-                                _currentIndex == 2 ? Colors.white : Colors.black),
-                        child: const Text("Mess", style: TextStyle(fontSize: 13),),
+                            foregroundColor: _currentIndex == 2
+                                ? Colors.white
+                                : Colors.black),
+                        child: const Text(
+                          "Mess",
+                          style: TextStyle(fontSize: 13),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -83,21 +94,111 @@ class _HomeInfoState extends State<HomeInfo> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 _currentIndex == 3 ? Colors.black : Colors.grey,
-                            foregroundColor:
-                                _currentIndex == 3 ? Colors.white : Colors.black),
-                        child: const Text("Blocks", style: TextStyle(fontSize: 13),),
+                            foregroundColor: _currentIndex == 3
+                                ? Colors.white
+                                : Colors.black),
+                        child: const Text(
+                          "Blocks",
+                          style: TextStyle(fontSize: 13),
+                        ),
                       ),
                     ],
                   ),
-                  
-                              ],
-                            ),
-                  Center(
+                ],
+              ),
+              Center(
                 child: _tabs[_currentIndex],
               )
-                ],
-              )),
+            ],
+          )),
         ],
+      ),
+    );
+  }
+}
+
+class NoticeBoard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      padding: EdgeInsets.all(8),
+      color: Colors.grey[200], // Light grey background color
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Notice Board",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Dark grey color
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment against vacant seats",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment 2023",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Seat Matrix 2023",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel allotment dsy degree",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel Allotment 2022",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                "Hostel fee structure updated",
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -111,9 +212,117 @@ class PhotoGallery extends StatefulWidget {
 }
 
 class _PhotoGalleryState extends State<PhotoGallery> {
+  List<Container> carouselItems = [
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.4), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Girls Hostel")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS90Zjm72gwX7kHFLrBb8fXCyvE1vNrTUHHCw&usqp=CAU'),
+            const SizedBox(height: 100),
+            const Text("VJTI Quad")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://lh3.googleusercontent.com/p/AF1QipOs6PPFmx6g15hYlcxirxmoKzIK0sc2cvqOvE1d=w600-k'),
+            const SizedBox(height: 100),
+            const Text("Boys Hostel")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/rooms.jpg'),
+            const SizedBox(height: 100),
+            const Text("Rooms")
+          ],
+        ))
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Photos"));
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+          // Other widgets
+          CarouselSlider(
+            items: carouselItems,
+            options: CarouselOptions(
+              height: size.height * 0.5, // Customize the height of the carousel
+              autoPlay: false, // Enable auto-play
+              enlargeCenterPage: true, // Increase the size of the center item
+              enableInfiniteScroll: true, // Enable infinite scroll
+              onPageChanged: (index, reason) {
+                // Optional callback when the page changes
+                // You can use it to update any additional UI components
+              },
+            ),
+          ),
+        ]));
   }
 }
 
@@ -125,9 +334,96 @@ class Facilities extends StatefulWidget {
 }
 
 class _FacilitiesState extends State<Facilities> {
+  List<Container> carouselItems = [
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://img.freepik.com/premium-photo/empty-room-medical-cabinet-healthcare-clinic_482257-23044.jpg'),
+            const SizedBox(height: 100),
+            const Text("Doctor")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 100),
+            const Text("Water Coolers")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://qph.cf2.quoracdn.net/main-qimg-8054037ad0a3548119713790e8508503-lq'),
+            const SizedBox(height: 100),
+            const Text("Lift")
+          ],
+        ))
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Facilities"));
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+          // Other widgets
+          CarouselSlider(
+            items: carouselItems,
+            options: CarouselOptions(
+              height: size.height * 0.5, // Customize the height of the carousel
+              autoPlay: false, // Enable auto-play
+              enlargeCenterPage: true, // Increase the size of the center item
+              enableInfiniteScroll: true, // Enable infinite scroll
+              onPageChanged: (index, reason) {
+                // Optional callback when the page changes
+                // You can use it to update any additional UI components
+              },
+            ),
+          ),
+        ]));
   }
 }
 
@@ -139,9 +435,134 @@ class MessInfo extends StatefulWidget {
 }
 
 class _MessInfoState extends State<MessInfo> {
+  List<Container> carouselItems = [
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Girl's Hostel Mess",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Breakfast-Lunch-Dinner",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://lh3.googleusercontent.com/p/AF1QipOEb2QY9SlZ0KbhOOyO5g7Ws_PoC8IHRVZVizXg=w600-k'),
+            const SizedBox(height: 50),
+            const Text(
+              "Boy's Hostel Mess A",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Breakfast-Lunch-Dinner",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/canteen.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "College Canteen",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Open for College Hours",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        ))
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Mess"));
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              // Other widgets
+              CarouselSlider(
+                items: carouselItems,
+                options: CarouselOptions(
+                  height:
+                      size.height * 0.5, // Customize the height of the carousel
+                  autoPlay: false, // Enable auto-play
+                  enlargeCenterPage:
+                      true, // Increase the size of the center item
+                  enableInfiniteScroll: true, // Enable infinite scroll
+                  onPageChanged: (index, reason) {
+                    // Optional callback when the page changes
+                    // You can use it to update any additional UI components
+                  },
+                ),
+              ),
+            ]));
   }
 }
 
@@ -153,8 +574,204 @@ class BlocksInfo extends StatefulWidget {
 }
 
 class _BlocksInfoState extends State<BlocksInfo> {
+  List<Container> carouselItems = [
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/A_block.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block B",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/B_block.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block A",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/C_block.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block C",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/D_block.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block D",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.network(
+                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block E",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/PG_boys.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "PG Hostel",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "PG Boy's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        ))
+  ];
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Blocks"));
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+          // Other widgets
+          CarouselSlider(
+            items: carouselItems,
+            options: CarouselOptions(
+              height: size.height * 0.5, // Customize the height of the carousel
+              autoPlay: false, // Enable auto-play
+              enlargeCenterPage: true, // Increase the size of the center item
+              enableInfiniteScroll: true, // Enable infinite scroll
+              onPageChanged: (index, reason) {
+                // Optional callback when the page changes
+                // You can use it to update any additional UI components
+              },
+            ),
+          ),
+        ]));
   }
 }
