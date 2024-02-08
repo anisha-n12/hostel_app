@@ -7,8 +7,8 @@
 </h1>
 
 <div align="center">
-   <strong>Project Name</strong> - One Sentence Description of your project<br>
-  CoC Inheritance 2023 || Team Name <br> <br>
+   <strong>Vjti Hostel</strong> - Digitize the process<br>
+  CoC Inheritance 2023 || Droidcrafters <br> <br>
   Add any <a href="https://shields.io/">Shields</a> here
 </div>
 <hr>
@@ -32,20 +32,32 @@
 
 ## 📝Description
 
-Add your **project description** here. Your project description should cover how your website/app works. That way you can convey what your project is without the need for anyone to view the code. A more *detailed README* in your project repository is encouraged, which can include build and use instructions etc.
-
-1. Include features and their usecases in bullet points
+The VJTI Hostels are completely managed by the hostel staff on pen and 
+registers. This results into, at times loss of data and confusion. Moreover, the in-out 
+entries for students are not regularly audited. 
+To overcome this problem, a Hostel Management System is to be developed 
+that has the following major features: 
+• Hostel registration form filling
+• Room allotment Data
+• In-out data
+• Leave application data
+• Room chage data
+• Complaint Box
+• Hostel notice board
+• Attendance through App
+• Guest allotment 
+• Hostel Facilities 
+• Room change applications
 
 ## 🔗Links
 
-- [GitHub Repository]()
+- [GitHub Repository](https://github.com/anisha-n12/hostel_app)
 - [Demo Video]()
-- [Drive Link to Screenshots of your project]()
-- [Hosted Website Link]()
+- [Drive Link to Screenshots of your project](https://drive.google.com/drive/folders/1tcwdsgl2x5XUlhi_gQb5axRqD4oVaecG?usp=sharing)
 - [App APK Link]()
-- [Hosted Backend Link]()
 
-Add any more links/resources you used for your project
+
+
 
 ## 🤖Tech-Stack
 
@@ -53,77 +65,66 @@ Mention all languages/libraries/frameworks used in your project **domain-wise**
 You can use icons too - find them [here](https://github.com/get-icon/geticon) 
 
 #### Front-end
-- HTML
-- CSS
-- JavaScript
-- etc.
+- Flutter
+- Dart
 
 #### Back-end
-- NodeJS
-- ExpressJS
-- etc.
+- Firebase
 
 #### Database
-- MongoDB
-- SQL
-- etc.
+- Firebase
 
-#### Computer Vision
-- OpenCV
-- etc.
 
 ## 📈Progress
 
 List down all the fully implemented features in your project
 
-- [x] Fully Implemented Feature 1 
-- [x] Fully Implemented Feature 2
+- [x] Student, Warden and Rector Registration
+- [x] Allotment of registered student to selected block
+- [x] Login and Authentication of Allotted Students, Warden and Rector
+- [x] Home page with photo gallery, and other information
+- [x] Guest Student Registration for room allotment
+- [x] Attendance marking with time and hostel campus restriction
+- [x] Profile view and update for Students
+- [x] Posting leave application and in out data through Student login
 
 List down all the partially implemented features in your project
 
-- [ ] Partially Implemented Feature 1 
-- [ ] Partially Implemented Feature 2
+- [ ] Attendance data displaying data to the warden and rector.
+
+- [ ] In-Out Data  displaying data to the warden and rector.
+
+- [ ] Leave Application  Displaying to rector.
 
 ## 🔮Future Scope
 
 List down all the future plans for the project here
 
-- Future Feature 1
-- Future Feature 2
+- Easy access to attendance data for rector and warden with good gui
+- In-out data automation with geofencing for entry or exit in college campus
 
 ## 💸Applications
 
->How can your project do its part in solving a real-life problem? What are its possible applications? Can it be monetized? Describe here.
+The VJTI Hostels are completely managed by the hostel staff on pen and 
+registers. This results into, at times loss of data and confusion. Moreover, the in-out 
+entries for students are not regularly audited. 
+To overcome this problem, a Hostel Management System is to be developed
 
-## 🛠Project Setup
-
->Include your project setup basics here. Steps for how someone else can setup your project on their machine. Add any relevant details as well.
-
-## 💻Usage
-
->Steps to run your project once its setup. If you have an app or website, list how the user can go about using it.
 
 ## 👨‍💻Team Members
 
 Add names of your team members with their emails and links to their GitHub accounts
 
-- [Team Member 1 Name](https://github.com/): Email 
-- [Team Member 2 Name](https://github.com/): Email 
+- [Ruchi Ingle](https://github.com/): Email 
+- [Anisha Nemade](https://github.com/): Email 
+- [Dakshayani Vaishnav](https://github.com/): Email 
+- [Vaibhavi Chaughule](https://github.com/): Email 
+
 
 ## 👨‍🏫Mentors
 
 Add names of your mentors with their emails and links to their GitHub accounts
 
-- [Mentor 1 Name](https://github.com/): Email 
-- [Mentor 2 Name](https://github.com/): Email 
-
-## 📱Screenshots
-Add a few screenshots for parts of the project completed till now to give the viewer a quick idea of what your project looks like. After all, a picture speaks a thousand words.
-
-You'll have to link the screenshots from your drive folder here.
-
-![Screenshot alt text](https://i.redd.it/qp8ocyzvyj8a1.jpg "Here is a screenshot")
-
-Use this template as a guide for writing your documentation. Feel free to customize and adapt it for you project.  
-For more Markdown syntax help, visit [here](https://www.markdownguide.org/basic-syntax/)
+- [Akshay Potkhule](https://github.com/): Email 
+- [Rishabh Singh](https://github.com/): Email 
 
