@@ -78,6 +78,13 @@ flutter:
     - lib\assets\images\profile2.png
     - lib\assets\images\hurry.png
     - lib\assets\images\ward.png
+    - lib\assets\images\A_block.jpg
+    - lib\assets\images\B_block.jpg
+    - lib\assets\images\C_block.jpg
+    - lib\assets\images\D_block.jpg
+    - lib\assets\images\PG_boys.jpg
+    - lib\assets\images\rooms.jpg
+    - lib\assets\images\canteen.jpg
     
     
   #   - images/a_dot_ham.jpeg

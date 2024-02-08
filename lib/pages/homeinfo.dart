@@ -252,9 +252,9 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         child: Column(
           children: [
             Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS90Zjm72gwX7kHFLrBb8fXCyvE1vNrTUHHCw&usqp=CAU'),
             const SizedBox(height: 100),
-            const Text("Hostel Gate")
+            const Text("VJTI Quad")
           ],
         )),
     Container(
@@ -274,9 +274,30 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         child: Column(
           children: [
             Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                'https://lh3.googleusercontent.com/p/AF1QipOs6PPFmx6g15hYlcxirxmoKzIK0sc2cvqOvE1d=w600-k'),
             const SizedBox(height: 100),
             const Text("Boys Hostel")
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/rooms.jpg'),
+            const SizedBox(height: 100),
+            const Text("Rooms")
           ],
         ))
   ];
@@ -331,7 +352,7 @@ class _FacilitiesState extends State<Facilities> {
         child: Column(
           children: [
             Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                'https://img.freepik.com/premium-photo/empty-room-medical-cabinet-healthcare-clinic_482257-23044.jpg'),
             const SizedBox(height: 100),
             const Text("Doctor")
           ],
@@ -375,9 +396,9 @@ class _FacilitiesState extends State<Facilities> {
         child: Column(
           children: [
             Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                'https://qph.cf2.quoracdn.net/main-qimg-8054037ad0a3548119713790e8508503-lq'),
             const SizedBox(height: 100),
-            const Text("Security")
+            const Text("Lift")
           ],
         ))
   ];
@@ -462,10 +483,10 @@ class _MessInfoState extends State<MessInfo> {
         child: Column(
           children: [
             Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+                'https://lh3.googleusercontent.com/p/AF1QipOEb2QY9SlZ0KbhOOyO5g7Ws_PoC8IHRVZVizXg=w600-k'),
             const SizedBox(height: 50),
             const Text(
-              "Boy's Hostel Mess1",
+              "Boy's Hostel Mess A",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const Text(
@@ -491,15 +512,14 @@ class _MessInfoState extends State<MessInfo> {
         ),
         child: Column(
           children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            Image.asset('lib/assets/images/canteen.jpg'),
             const SizedBox(height: 50),
             const Text(
-              "Boy's Hostel Mess2",
+              "College Canteen",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const Text(
-              "Breakfast-Lunch-Dinner",
+              "Open for College Hours",
               style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
               textAlign: TextAlign.left,
             )
@@ -571,38 +591,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
         ),
         child: Column(
           children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
-            const SizedBox(height: 50),
-            const Text(
-              "Block A",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            const Text(
-              "Girl's Hostel",
-              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-              textAlign: TextAlign.left,
-            )
-          ],
-        )),
-    Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.transparent,
-              Colors.transparent,
-              Colors.transparent,
-              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            Image.asset('lib/assets/images/A_block.jpg'),
             const SizedBox(height: 50),
             const Text(
               "Block B",
@@ -631,8 +620,36 @@ class _BlocksInfoState extends State<BlocksInfo> {
         ),
         child: Column(
           children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            Image.asset('lib/assets/images/B_block.jpg'),
+            const SizedBox(height: 50),
+            const Text(
+              "Block A",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Text(
+              "Girl's Hostel",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )),
+    Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.black.withOpacity(0.6), // Adjust the opacity as needed
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Image.asset('lib/assets/images/C_block.jpg'),
             const SizedBox(height: 50),
             const Text(
               "Block C",
@@ -661,8 +678,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
         ),
         child: Column(
           children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            Image.asset('lib/assets/images/D_block.jpg'),
             const SizedBox(height: 50),
             const Text(
               "Block D",
@@ -721,8 +737,7 @@ class _BlocksInfoState extends State<BlocksInfo> {
         ),
         child: Column(
           children: [
-            Image.network(
-                'https://images.shiksha.com/mediadata/images/1601280667phpp1zxIN.png'),
+            Image.asset('lib/assets/images/PG_boys.jpg'),
             const SizedBox(height: 50),
             const Text(
               "PG Hostel",
