@@ -1,6 +1,6 @@
 # **Hostel Management System**
 
-🚀 A web-based system designed to efficiently manage hostel operations, including student registration, room allocation, attendance tracking, and in-out entry logging.
+🚀 An app-based system designed to efficiently manage hostel operations, including student registration, room allocation, attendance tracking, and in-out entry logging.
 
 ## 📌 Features
 
